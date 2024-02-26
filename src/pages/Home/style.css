@@ -1,0 +1,48 @@
+.container-home{
+    display: flex;
+    flex-direction: column;
+
+    height: calc(100vh - 80px);
+   align-items: start;
+   justify-content: start;
+}
+
+.container-saudacao{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    width: 80vw;
+    margin-top: 10px;
+}
+.titulo-saudacao{
+    font-size: 1.7em;
+    margin-left: 1em;
+}
+.container-contadores{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 50px;
+    height: 100px;
+    gap: 10px;
+    padding-left: 10px;
+}
+.container-item-contador{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 8%;
+    border-radius: 6px;
+    box-shadow: 1px 1px #ccc;
+    /* background-color: #444; */
+}
+.container-item-contador > span{
+    font-weight: 700;
+}
+.porcentagem-valor{
+    font-size: 1.5em;
+}

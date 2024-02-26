@@ -1,0 +1,42 @@
+.container-corpo{
+    width: 100vw;
+    height: 100vh;
+}
+.container-titulo{
+    width: 100vw; 
+    text-align: center;
+}
+.container-orientacoes{
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    text-align: left;
+    align-items: start;
+
+    margin-left: 10px;
+}
+.container-orientacoes > p{
+    margin-top: 2px;
+}
+.container-input-importacao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+.table-importacao-arquivo{
+    width: 95vw;
+    border: 1px solid #888;
+    border-radius: 8px;
+    padding: 4px;
+    margin-top: 10px;
+}
+.table-importacao-arquivo > thead > tr{
+    text-transform: uppercase;
+}
+.table-importacao-arquivo > thead > tr > td,
+.table-importacao-arquivo > tbody > tr > td{
+    border-bottom: 1px solid #888;
+    border-right: 1px solid #888;
+    padding: 3px;
+}

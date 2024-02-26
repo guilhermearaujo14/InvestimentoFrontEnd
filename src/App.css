@@ -1,0 +1,28 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+body{
+  background: radial-gradient(circle, #444 0%,  #000 100%); 
+  color: #fff;
+  width: 100vw;
+}
+button{
+  min-width: 130px;
+  padding: 0 8px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #8d8d8d;
+  border-radius: 6px;
+  color: #fff;
+  font-size: medium;
+  font-weight: 700;
+  transition: 1.2s;
+}
+button:hover{
+  color: #555;
+  background-color: #eee;
+  transition: 0.8s;
+}

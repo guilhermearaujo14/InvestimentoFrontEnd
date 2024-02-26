@@ -1,0 +1,69 @@
+.container-investimentos-agrupados-card{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.container-investimentos-agrupados-card-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-investimentos-agrupados-card-filtros{
+    margin-top: 10px;
+}
+
+.container-investimentos-agrupados-card-list{}
+
+.investimentos-agrupados-card-list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 95vw;
+    gap: 5px;
+    list-style: none;
+}
+.investimentos-agrupados-card-list-item{
+    width: 22%;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 6px;
+}
+.item-papel{
+    border-bottom: 1px solid #ddd ;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.item-valor-atual{
+    margin-top: 5px;
+}
+.item-descricao{
+    font-weight: 500;
+}
+.item-lucro{
+    color: green;
+    font-weight: bold;
+}
+.item-perda{
+    color: rgb(255,0,0, 0.6);
+    font-weight: bold;
+}
+.item-acoes{
+    border-top: 1px solid #444;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.item-acao-especifico{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    cursor: pointer;
+}

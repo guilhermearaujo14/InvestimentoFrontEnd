@@ -1,0 +1,39 @@
+.container-contadores{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 50px;
+    height: 100px;
+    gap: 10px;
+    padding-left: 10px;
+}
+.container-item-contador{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    border-radius: 6px;
+    box-shadow: 1px 1px #ccc;
+    /* background-color: #444; */
+}
+.container-item-contador > span{
+    font-weight: 700;
+}
+.porcentagem-valor{
+    font-size: 1.5em;
+}
+.porcentagem{
+    font-size: 1em;
+}
+@media (max-width: 800px) {
+    .container-contadores{
+        display: flex;
+        flex-direction: column;
+    }
+    .container-item-contador{
+        width: 100%;
+    }
+}

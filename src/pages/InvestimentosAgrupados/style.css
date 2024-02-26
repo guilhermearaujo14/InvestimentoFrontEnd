@@ -1,0 +1,111 @@
+.container-investimentos-agrupados{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+}
+.container-header-investimentos-agrupados{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+}
+.container-titulo-invest-agrupados{
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 80vw;
+}
+.container-actions-investimentos-agrupados{
+    display: flex;
+    flex: row;
+    justify-content: end;
+    width: 40vw;
+}
+.btn-adicionar-investimento{
+    width: auto;
+    height: 40px;
+    padding: 6px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ddd;
+    font-size: 1em;
+    margin: 5px 0px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.btn-adicionar-investimento > a{
+    color: #000;
+}
+.table-investimentos-agrupados{
+    padding: 5px;
+    border-color: #ddd;
+    border-radius: 4px;
+    background-color: #444;
+    width: 90vw;
+}
+.table-investimentos-agrupados > thead > tr{
+    background-color: #222;
+}
+.table-investimentos-agrupados > thead > tr > td{
+    padding: 10px;
+}
+.table-investimentos-agrupados > tbody > tr > td{
+    padding: 10px;
+}
+.table-investimentos-agrupados > tbody > tr:nth-last-child(even){
+    background-color: #222;
+}
+.container-acoes{
+    display: flex;
+    flex-direction: row;
+}
+.container-abrir-compras{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #ddd;
+    color: #000;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.container-abrir-compras > a{
+    color: #000;
+}
+/*carregar dados*/
+.container-carregando{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   font-size: 30px; 
+}
+.container-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/*Erro usuario não esta logado*/
+.container-erro-usuarioLogado{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.icon-seta{
+    animation: animacao_seta 2s infinite;
+    border-radius: 6px;
+}
+
+@keyframes animacao_seta {
+    0%{ left: 0px; background-color: #ddd;}
+    100%{ left: 50px; background-color: red; }
+}
