@@ -40,3 +40,15 @@
     border-right: 1px solid #888;
     padding: 3px;
 }
+.container-erro-usuarioLogado{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.icon-seta{
+    animation: animacao_seta 2s infinite;
+    border-radius: 6px;
+}

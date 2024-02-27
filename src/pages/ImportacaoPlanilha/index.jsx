@@ -1,11 +1,26 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../../components/navbar'
 import papa from 'papaparse';
 import './style.css';
+import { VscArrowLeft } from 'react-icons/vsc';
+
 import api from '../../services/api';
 
 function ImportacaoPlanilha(){
     const [dados, setDados] = useState([]);
+    const usuarioLogado = sessionStorage.getItem("UsuarioID");
+    
+    if(!usuarioLogado){
+        return (
+            <div className='container-erro-usuarioLogado'>
+                <h1>Ops... Parece que você não esta logado!</h1>
+                <span>Faça login novamente, clicando <Link to={'/'}>AQUI! <VscArrowLeft className='icon-seta' size={20}/> </Link></span>
+            </div>
+        )
+    }
+
+
     return(
         <div className='container'>
             <div className="container-navbar">
@@ -32,12 +47,13 @@ function ImportacaoPlanilha(){
                     <input type="file" name="arquivo" accept='.csv' id="arquivo" onChange={importarArquivo}/>
                 </div>
                 <div className="container-btn-importacao">
-                    <button onClick={importarPlanilha}>Importar dados</button>
+                    <button onClick={importarPlanilha}>IMPORTAR PLANILHA</button>
                 </div>
                 <div className="container-table-arquivo-importado">
                     <table className='table-importacao-arquivo' style={{display:  dados =='' ? 'none' : '' }}>
                         <thead>
                             <tr>
+                                <td>-</td>
                                 <td>Papel</td>
                                 <td>Quantidade</td>
                                 <td>Preço</td>
@@ -48,11 +64,12 @@ function ImportacaoPlanilha(){
                         </thead>
                         <tbody>
                                 {
-                                    dados.map((dado)=>{
+                                    dados.map((dado, index)=>{
                                         let valorPago = dado.preco.replace(",",".")
                                         let total = parseFloat(valorPago) * parseInt(dado.quantidade)
                                         return(
-                                            <tr key={dado.papel}>
+                                            <tr key={index}>
+                                                <td>{index}</td>
                                                 <td>{dado.papel.toUpperCase()}</td>
                                                 <td>{dado.quantidade}</td>
                                                 <td>{dado.preco}</td>
@@ -83,8 +100,18 @@ function ImportacaoPlanilha(){
 }
 
 async function importarPlanilha(){
-    await api.post('/RegistrarInvestimentoByPlanilha',{
+    validaPlanilhaImportada()
+    
+    await api.post(`/RegistrarInvestimentoByPlanilha/${usuarioLogado}`,{
         dados
+    })
+}
+
+function validaPlanilhaImportada(){
+    dados.map((item, index)=>{
+        if(!item.papel || !item.quantidade || !item.preco || !item.data || !item.tipo){
+            alert(`Ops... Existe um erro na linha ${index}` )
+        }
     })
 }
 
