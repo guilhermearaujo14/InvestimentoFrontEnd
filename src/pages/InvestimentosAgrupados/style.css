@@ -36,6 +36,7 @@
 }
 .btn-adicionar-investimento > a{
     color: #000;
+    margin-left: 8px;
 }
 .table-investimentos-agrupados{
     padding: 5px;

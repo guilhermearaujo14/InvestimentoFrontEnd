@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { CiCirclePlus  } from 'react-icons/ci';
 import { VscArrowLeft } from 'react-icons/vsc';
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { IoCloudUpload } from "react-icons/io5";
 import ModalAdicionarPapel from '../../components/Modal/ModalAdicionarPapel';
 import InvestimentosAgrupadosCard from '../InvestimentosAgrupadosCard';
 
@@ -79,6 +80,13 @@ function InvestimentosAgrupados(){
                         <button className='btn-adicionar-investimento'>
                             <AiOutlineMinusCircle size={16} />
                             Vender ativo
+                        </button>
+                    </Link>
+
+                    <Link to={'/ImportacaoPlanilha'}>
+                        <button className='btn-adicionar-investimento'>
+                            <IoCloudUpload  size={18} />
+                            Importar planilha
                         </button>
                     </Link>
 

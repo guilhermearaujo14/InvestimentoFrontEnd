@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/navbar'
+import { toast } from 'react-toastify';
 import papa from 'papaparse';
 import './style.css';
 import { VscArrowLeft } from 'react-icons/vsc';
+import  Carregando  from '../../components/Modal/Carregando/Carregando';
 
 import api from '../../services/api';
 
 function ImportacaoPlanilha(){
     const [dados, setDados] = useState([]);
+    const [isCarregando, setIsCarregando] = useState(false)
     const usuarioLogado = sessionStorage.getItem("UsuarioID");
     
     if(!usuarioLogado){
@@ -84,7 +87,7 @@ function ImportacaoPlanilha(){
                     </table> 
                 </div>
             </div>
-            
+            <Carregando isOpen={isCarregando}/>
         </div>
     )
 
@@ -100,19 +103,35 @@ function ImportacaoPlanilha(){
 }
 
 async function importarPlanilha(){
-    validaPlanilhaImportada()
-    
-    await api.post(`/RegistrarInvestimentoByPlanilha/${usuarioLogado}`,{
-        dados
-    })
+    setIsCarregando(true)
+    const isValido = validaPlanilhaImportada()
+    let response = [];
+    if(isValido == true){
+        try {           
+            response = await api.post(`/RegistrarInvestimentoByPlanilha/${usuarioLogado}`,{
+                dados
+            })
+            console.log(response)
+            toast.success(response.data.message, {position: 'top-center'})
+        } catch (error) {
+            toast.warning(error, {position: 'top-center'})    
+        }
+
+    }else{
+        toast.warning(response.data, {position: 'top-center'})
+    }
+    setIsCarregando(false)
 }
 
 function validaPlanilhaImportada(){
+    let isValido = true
     dados.map((item, index)=>{
         if(!item.papel || !item.quantidade || !item.preco || !item.data || !item.tipo){
             alert(`Ops... Existe um erro na linha ${index}` )
+            isValido = false
         }
     })
+    return isValido
 }
 
 }
