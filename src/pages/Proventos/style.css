@@ -15,8 +15,9 @@
 }
 .container-cabecalho{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
+    width: auto;
 }
 .input-meses, 
 .input-ano{
@@ -50,6 +51,7 @@
     padding: 4px;
 }
 .contaier-btn-adicionar{
+    margin-top: 10px;
     padding-top: 8px;
 }
 
@@ -60,4 +62,18 @@
     justify-content: start;
     text-align: start;
     width: 500px;
+}
+
+@media (max-width: 500px) {
+    .container-cabecalho{
+        display: flex;
+        flex-direction: column;
+    }
+    .input-meses, 
+    .input-ano,
+    .input-ticket, 
+    .input-valor{
+        width: 100vw;
+    }
+    
 }
