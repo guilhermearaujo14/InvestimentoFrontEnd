@@ -74,7 +74,7 @@ try {
                 <Link to={'/ImportacaoPlanilha'}> Importar planilha</Link>
                 <Link to={'/Proventos'}> Proventos</Link>
             </div>
-            <Carregando isOpen={isCarregando} />
+            <Carregando isOpen={isCarregando} mensagem={''}/>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { ImSpinner9 } from 'react-icons/im';
 import './style.css';
 
 // eslint-disable-next-line react/prop-types
-function Carregando({ isOpen }){
+function Carregando({ isOpen, mensagem}){
     if(isOpen){
         return(
         <div className="container-modal">
@@ -13,6 +13,9 @@ function Carregando({ isOpen }){
                             <ImSpinner9 size={30} />
                         </div>
                         <span>Carregando...</span>
+                        <div className="container-msg">
+                            <span>{mensagem}</span>
+                        </div>
                     </div>
                 </div>
             </div>

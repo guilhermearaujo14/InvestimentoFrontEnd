@@ -87,7 +87,7 @@ function ImportacaoPlanilha(){
                     </table> 
                 </div>
             </div>
-            <Carregando isOpen={isCarregando}/>
+            <Carregando isOpen={isCarregando} mensagem={'Aguarde... Esse processo pode demorar varios minutos!'}/>
         </div>
     )
 
