@@ -38,33 +38,31 @@ export default function Proventos(){
                     <h1>Tela Proventos</h1>
                 </div>
                 <div className="container-cabecalho">
-                    <div className="input-meses">
-                        <label htmlFor="mes">Mês referência</label>
-                        <select name="mes" id="mes" value={mesRef} onChange={(e)=>setMesRef(e.target.value)}>
-                            {
-                                meses.map((mes)=>
-                                <option  key={mes.id} >{mes.nome}</option>
-                                )
-                            }
-                        </select>
+                        <div className="input-meses">
+                            <label htmlFor="mes">Mês referência</label>
+                            <select name="mes" id="mes" value={mesRef} onChange={(e)=>setMesRef(e.target.value)}>
+                                {
+                                    meses.map((mes)=>
+                                    <option  key={mes.id} >{mes.nome}</option>
+                                    )
+                                }
+                            </select>
+                        </div>
+                        <div className="input-ano">
+                            <label htmlFor="ano">Ano referência</label>
+                            <input type="number" name="ano" id="ano" placeholder='Informe o ano' value={anoRef} onChange={(e)=> setAnoRef(e.target.value)} />
+                        </div>
+                        <div className="input-ticket">
+                            <label htmlFor="ticket">Ticket</label>
+                            <input type="text" name="ticket" id="ticket" value={ticket} onChange={(e)=>setTicket(e.target.value)}/>
+                        </div>
+                        <div className="input-valor">
+                            <label htmlFor="valor">Valor</label>
+                            <input type="number" name="valor" id="valor" value={valor} onChange={(e)=>setValor(e.target.value)} />
+                        </div>
+                    <div className="contaier-btn-adicionar">
+                        <button onClick={Adicionar}>ADICIONAR</button>
                     </div>
-                    <div className="input-ano">
-                        <label htmlFor="ano">Ano referência</label>
-                        <input type="number" name="ano" id="ano" placeholder='Informe o ano' value={anoRef} onChange={(e)=> setAnoRef(e.target.value)} />
-                    </div>
-                </div>
-                <div className="container-ticket-valor">
-                    <div className="input-ticket">
-                        <label htmlFor="ticket">Ticket</label>
-                        <input type="text" name="ticket" id="ticket" value={ticket} onChange={(e)=>setTicket(e.target.value)}/>
-                    </div>
-                    <div className="input-valor">
-                        <label htmlFor="valor">Valor</label>
-                        <input type="number" name="valor" id="valor" value={valor} onChange={(e)=>setValor(e.target.value)} />
-                    </div>
-                </div>
-                <div className="contaier-btn-adicionar">
-                    <button onClick={Adicionar}>ADICIONAR</button>
                 </div>
                 <div className="container-list-proventos">
                     <ul>

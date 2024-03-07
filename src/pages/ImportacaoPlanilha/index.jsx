@@ -34,7 +34,7 @@ function ImportacaoPlanilha(){
                     <h1>Importação de planilha</h1>
                 </div>
                 <div className="container-orientacoes">
-                    <span>Para importar as compras de ativos baixe AQUI a planilha</span>
+                    <span>Para importar as compras de ativos baixe <strong><a href='../../../public/planilha_importacao.csv'>AQUI</a></strong> a planilha</span>
                     <p>
                         O preenchimento da planilha deve ser feito corretamente, para não haver erros com o processo de Importação.
                     </p>
