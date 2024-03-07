@@ -1,0 +1,35 @@
+.container-corpo-modal{
+    padding: 0;
+    width: 50%;
+    background-color: #aaa;
+}
+.container-modal-cabecalho{
+    display: flex;
+    flex-direction: row;
+    background-color: #000;
+    height: 40px;
+    padding: 0 0 0 10px;
+    color: #fff;
+}
+.container-titulo-modal > h3{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+    color: #fff;
+}
+.container-titulo-modal{
+    width: 90vw;
+}
+.container-modal-fechamento{
+    width: 10vw;
+}
+.container-table-movimentacao-ativo{
+    width: 100%;
+}
+.table-movimentacoes-ativo > thead > tr > td{
+    padding: 5px;
+    border-bottom: 1px solid #555 ;
+    border-right: 1px solid #555;
+    color: #000;
+}

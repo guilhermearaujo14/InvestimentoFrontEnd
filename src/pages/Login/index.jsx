@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import './style.css';
 import Carregando from '../../components/Modal/Carregando/Carregando';
 
+import MovimentacaoAtivo from '../../components/Modal/MovimentacaoAtivo';
 
 function Login(){
 
@@ -71,10 +72,10 @@ try {
                         <p><Link to={'/cadastroUsuario'}>Não tem cadastro?</Link></p>
                     </form>
                 </div>
-                <Link to={'/ImportacaoPlanilha'}> Importar planilha</Link>
                 <Link to={'/Proventos'}> Proventos</Link>
             </div>
             <Carregando isOpen={isCarregando} mensagem={''}/>
+            <MovimentacaoAtivo isEnable={true} ticket={'VALE3'} />
         </div>
     )
 }
