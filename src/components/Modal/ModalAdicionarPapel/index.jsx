@@ -194,7 +194,7 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                         <h2>Cadastrar papel</h2>
                     </div>
                     <div className="container-close-modal">
-                        <button className='close' onClick={fechaModal}>X</button>
+                        <div className="btn-close" onClick={fechaModal}>X</div>
                     </div>
                 </div>
                 <div className="container-main">

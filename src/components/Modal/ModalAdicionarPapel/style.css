@@ -12,6 +12,7 @@
     flex-direction: row;
     text-align: center;
     border-bottom: 1px solid #777;
+
 }
 .container-titulo-modal{
     color: #222;
@@ -19,25 +20,25 @@
     height: 100%;
 }
 .container-close-modal{
+    width: 10%;
     display: flex;
     flex-direction: column;
-    width: 10%;
     align-items: center;
     justify-content: center;
     color: #222;
     font-size: 1em;
     font-weight: bold;
-
 }
-.close{
+.btn-close{
     cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 100%;
+    border-radius: 50%;
+    border: 1px solid #555;
+    padding: 5px;
 }
-.close:hover{
-    color: red;
+.btn-close:hover{
     transition-duration: 1s;
-    animation: giraClose 1s both;
+    background-color: #8d8d8d;
+    color: #fff;
 }
 @keyframes giraClose {
     from{ transform: rotate(0deg)}
@@ -95,7 +96,6 @@
     font-size: 1.3em;
     font-weight: 600;
     color: #222;
-    background-color: #17f503f9;
     margin-bottom: 20px;
     cursor: pointer;
 }
