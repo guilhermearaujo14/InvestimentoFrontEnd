@@ -27,9 +27,20 @@
 .container-table-movimentacao-ativo{
     width: 100%;
 }
-.table-movimentacoes-ativo > thead > tr > td{
+.table-movimentacoes-ativo{
+    width: 100%;
+}
+.table-movimentacoes-ativo > thead > tr > td,
+.table-movimentacoes-ativo > tbody > tr > td{
     padding: 5px;
     border-bottom: 1px solid #555 ;
     border-right: 1px solid #555;
     color: #000;
+    font-weight: 800;
+}
+.table-movimentacoes-ativo > thead > tr > td{
+    background-color: #fdfdfd;
+}
+.table-movimentacoes-ativo > tbody > tr > td{
+    
 }
