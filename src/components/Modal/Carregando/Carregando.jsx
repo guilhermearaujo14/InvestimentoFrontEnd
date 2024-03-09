@@ -6,7 +6,7 @@ function Carregando({ isOpen, mensagem}){
     if(isOpen){
         return(
         <div className="container-modal">
-            <div className="container-modal-estrutura">
+            <div className="container-modal-estrutura-carregando">
                 <div className="container-header-modal">
                     <div className="container-titulo-modal">
                         <div className="container-spinner">
