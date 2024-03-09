@@ -2,13 +2,14 @@ import { FaRegEdit,FaList, FaRegPlusSquare } from "react-icons/fa"
 import './style.css'
 import { useEffect, useState } from "react"
 import ModalAdicionarPapel from '../../components/Modal/ModalAdicionarPapel';
-
+import MovimentacaoAtivo from '../../components/Modal/MovimentacaoAtivo';
 
 // eslint-disable-next-line react/prop-types
 function InvestimentosAgrupadosCard({ dadosList }){
     const [dados, setDados] = useState();
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [ticketOpenModal, setTicketOpenModal] = useState('')
+    const [isOpenModalRelatorio, setIsOpenModalRelatorio] = useState(false)
 
     
     useEffect(()=>{
@@ -21,6 +22,7 @@ function InvestimentosAgrupadosCard({ dadosList }){
     }
     function fechaModal(){
         setIsOpenModal(!open)
+        setIsOpenModalRelatorio(!isOpenModalRelatorio)
     }
     
     
@@ -32,7 +34,12 @@ function InvestimentosAgrupadosCard({ dadosList }){
 }
 
 
+function AbrirRelatorioComprasAtivo(ticket){
+    setTicketOpenModal(ticket)
+    setIsOpenModalRelatorio(true)
+    console.log(isOpenModalRelatorio)
 
+}
 
     if(!dados){
         return(
@@ -85,7 +92,7 @@ function InvestimentosAgrupadosCard({ dadosList }){
                                         <div className='item-acao-especifico' title='Editar'>
                                             <FaRegEdit size={17} />
                                         </div>
-                                        <div className='item-acao-especifico' title={`Listar compras ${item.PAPEL}`} onClick={()=>alert(`Abrir relatorio de compras do ativo ${item.PAPEL}`)}>
+                                        <div className='item-acao-especifico' title={`Listar compras ${item.PAPEL}`} onClick={()=> AbrirRelatorioComprasAtivo(item.PAPEL)}>
                                             <FaList size={17} />
                                         </div>
                                         <div className='item-acao-especifico' title='Adicionar ativo' onClick={()=> novaAdicionaPapelExistente(item.PAPEL)}>
@@ -99,6 +106,7 @@ function InvestimentosAgrupadosCard({ dadosList }){
                 </div>
             </div>
             <ModalAdicionarPapel isOpen={isOpenModal} ticketParamter={ticketOpenModal} fechaModal={fechaModal} isEdit={false} investimento={''} />
+            <MovimentacaoAtivo isEnable={isOpenModalRelatorio} ticket={ticketOpenModal} fechaModal={fechaModal}/>
         </div>
     )   
 }

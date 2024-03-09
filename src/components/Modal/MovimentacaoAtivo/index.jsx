@@ -1,28 +1,40 @@
 
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.css';
 import { tr } from 'date-fns/locale';
+import api from '../../../services/api';
+import FormataData from '../../../utils/FormataData';
 
-export default function MovimentacaoAtivo({ isEnable, ticket }){
+export default function MovimentacaoAtivo({ isEnable, ticket, fechaModal }){
 if(isEnable){
-    const [dados, setDados] = useState(
-        [{"DATA_COMPRA": '07/03/2024', "QUANTIDADE": 100, "VALOR": 66.70, "TOTAL_INVESTIDO":66500.87, "TIPO_MOVIMENTACAO": "Compra"}])
+    const usuarioLogadoId = sessionStorage.getItem("UsuarioID");
+    const [dados, setDados] = useState([])
+
+        async function GetDadosbyTicket(){
+            const response = await api.get(`/movimentacoesByPapel/${usuarioLogadoId}/${ticket}`)
+            console.log(response.data)
+            setDados(response.data)
+        }
+
+        useEffect(()=>{
+            GetDadosbyTicket()
+        },[])
         
         let valorFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'});
 
     return(
         <div className="container-modal">
             <div className="container-corpo-modal">
-
                 <div className="container-modal-cabecalho">
                     <div className="container-titulo-modal">
-                        <h3>Movimentação ativo</h3>
+                        <h3>Movimentações do ativo - {ticket} </h3>
                     </div>
                     <div className="container-modal-fechamento">
-                        <span>fechar</span>
+                        <span onClick={fechaModal}>fechar</span>
                     </div>
                 </div>
+
                 <div className="container-table-movimentacao-ativo">
                     <table className='table-movimentacoes-ativo'>
                         <thead>
@@ -39,12 +51,13 @@ if(isEnable){
                                 dados.map((dado)=>{
                                     return(
                                         <tr>
-                                            <td>{dado.DATA_COMPRA}</td>
+                                            <td>{FormataData(dado.DATA_COMPRA)}</td>
                                             <td>{dado.QUANTIDADE}</td>
                                             <td>{valorFormatado.format(dado.VALOR)}</td>
                                             <td>{valorFormatado.format(dado.TOTAL_INVESTIDO)}</td>
                                             <td>{dado.TIPO_MOVIMENTACAO}</td>
                                         </tr>
+
                                     )
                                 })
                             }
