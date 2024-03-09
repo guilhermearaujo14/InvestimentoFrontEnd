@@ -2,7 +2,7 @@
 .container-corpo-modal{
     padding: 0;
     background-color: #aaa;
-    width: 50%;
+    width: 40%;
     max-height: 700px;
 }
 .container-modal-cabecalho{
@@ -25,7 +25,16 @@
     width: 90vw;
 }
 .container-modal-fechamento{
+    display: flex;
     width: 10vw;
+    color: #FFF;
+    font-size: 1em;
+    font-weight: 900;
+    align-items: center;
+    justify-content: center;
+}
+.container-modal-fechamento > span{
+    cursor: pointer;
 }
 .container-table-movimentacao-ativo{
     width: 100%;
@@ -34,11 +43,12 @@
 }
 .table-movimentacoes-ativo{
     width: 100%;
+    text-align: center;
 
 }
 .table-movimentacoes-ativo > thead > tr > td,
 .table-movimentacoes-ativo > tbody > tr > td{
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid #555 ;
     border-right: 1px solid #555;
     color: #000;

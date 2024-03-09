@@ -22,7 +22,7 @@ function InvestimentosAgrupadosCard({ dadosList }){
     }
     function fechaModal(){
         setIsOpenModal(!open)
-        setIsOpenModalRelatorio(!isOpenModalRelatorio)
+        setIsOpenModalRelatorio(false)
     }
     
     

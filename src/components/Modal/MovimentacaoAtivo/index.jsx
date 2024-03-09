@@ -31,7 +31,7 @@ if(isEnable){
                         <h3>Movimentações do ativo - {ticket} </h3>
                     </div>
                     <div className="container-modal-fechamento">
-                        <span onClick={fechaModal}>fechar</span>
+                        <span onClick={fechaModal}>X</span>
                     </div>
                 </div>
 
@@ -39,16 +39,17 @@ if(isEnable){
                     <table className='table-movimentacoes-ativo'>
                         <thead>
                             <tr>
-                                <td>Data da compra</td>
-                                <td>Quantidade</td>
+                                <td>Data</td>
+                                <td>Qtd.</td>
                                 <td>Valor</td>
                                 <td>Total investido</td>
-                                <td>Tipo de movimentação</td>
+                                <td>Tipo</td>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 dados.map((dado)=>{
+                                    
                                     return(
                                         <tr>
                                             <td>{FormataData(dado.DATA_COMPRA)}</td>

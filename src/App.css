@@ -8,6 +8,7 @@ body{
   background: radial-gradient(circle, #444 0%,  #000 100%); 
   color: #fff;
   width: 100vw;
+  overflow-x: hidden;
 }
 button{
   min-width: 130px;
