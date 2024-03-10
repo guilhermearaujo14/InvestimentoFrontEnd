@@ -2,6 +2,11 @@
     width: 100vw;
     height: 100vh;
 }
+.container-navbar{
+    position: fixed;
+    display: flex;
+    top: 0;
+}
 .container-titulo{
     width: 100vw; 
     text-align: center;
@@ -12,8 +17,8 @@
     width: 90vw;
     text-align: left;
     align-items: start;
-
     margin-left: 10px;
+    margin-top: 50px;
 }
 .container-orientacoes > p{
     margin-top: 2px;
