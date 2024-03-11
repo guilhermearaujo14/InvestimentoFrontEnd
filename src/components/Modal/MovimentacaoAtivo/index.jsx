@@ -1,8 +1,5 @@
-
-
 import { useEffect, useState } from 'react';
 import './style.css';
-import { tr } from 'date-fns/locale';
 import api from '../../../services/api';
 import FormataData from '../../../utils/FormataData';
 

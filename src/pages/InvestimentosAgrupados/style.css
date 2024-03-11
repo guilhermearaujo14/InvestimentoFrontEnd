@@ -4,15 +4,20 @@
     box-sizing: border-box;
     align-items: center;
 }
-.container-header-investimentos-agrupados{
+.container-titulo-relatorio-compras{
     display: flex;
     flex-direction: row;
     width: 90vw;
 }
+.container-header-investimentos-agrupados{
+    display: flex;
+    flex-direction: row;
+    margin-top: 60px;
+}
 .container-titulo-invest-agrupados{
     padding-left: 10px;
     padding-top: 10px;
-    width: 80vw;
+    width: 50vw;
 }
 .container-actions-investimentos-agrupados{
     display: flex;
@@ -112,4 +117,12 @@
 @keyframes animacao_seta {
     0%{ left: 0px; background-color: #ddd;}
     100%{ left: 50px; background-color: red; }
+}
+.container-lista{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+
 }

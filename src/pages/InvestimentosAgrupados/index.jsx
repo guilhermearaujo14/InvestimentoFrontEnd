@@ -29,6 +29,7 @@ function InvestimentosAgrupados(){
             console.log(dados)
         } catch (error) {
             toast.warning(error, {position: 'top-center'})
+            console.log(error)
         }
     }
 
@@ -64,7 +65,9 @@ function InvestimentosAgrupados(){
     }
     return(
         <div className="container-investimentos-agrupados">
-            <Navbar />
+            <div className="container-navbar">
+                <Navbar />
+            </div>
             <div className="container-header-investimentos-agrupados">
                 <div className="container-titulo-invest-agrupados">
                     <h1>Lista de ativos</h1>

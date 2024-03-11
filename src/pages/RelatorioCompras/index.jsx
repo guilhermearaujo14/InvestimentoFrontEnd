@@ -114,7 +114,7 @@ export default function RelatorioCompras(){
         {"ID": 4, "DESCRICAO": 'BDR' }]
     return(
         <div className="container-relatorio-compras">
-            <div className="container-header-relatorio-compras">
+            <div className="container-navbar">
                 <Navbar />
             </div>
             <div className="container-main-relatorio-compras">
