@@ -45,10 +45,10 @@ if(isEnable){
                         </thead>
                         <tbody>
                             {
-                                dados.map((dado)=>{
+                                dados.map((dado, index)=>{
                                     
                                     return(
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{FormataData(dado.DATA_COMPRA)}</td>
                                             <td>{dado.QUANTIDADE}</td>
                                             <td>{valorFormatado.format(dado.VALOR)}</td>
