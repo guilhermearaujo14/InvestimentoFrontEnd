@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react';
-import './style.css';
 import api from '../../../services/api';
 import FormataData from '../../../utils/FormataData';
+import FormataMoeda from '../../../utils/FormataMoeda';
+import './style.css';
 
-export default function MovimentacaoAtivo({ isEnable, ticket, fechaModal }){
+// eslint-disable-next-line react/prop-types
+function MovimentacaoAtivo({ isEnable, ticket, fechaModal }){
 if(isEnable){
     const usuarioLogadoId = sessionStorage.getItem("UsuarioID");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [dados, setDados] = useState([])
 
+        // eslint-disable-next-line no-inner-declarations
         async function GetDadosbyTicket(){
             const response = await api.get(`/movimentacoesByPapel/${usuarioLogadoId}/${ticket}`)
             console.log(response.data)
             setDados(response.data)
         }
 
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useEffect(()=>{
             GetDadosbyTicket()
         },[])
         
-        let valorFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'});
 
     return(
         <div className="container-modal">
@@ -51,8 +55,8 @@ if(isEnable){
                                         <tr key={index}>
                                             <td>{FormataData(dado.DATA_COMPRA)}</td>
                                             <td>{dado.QUANTIDADE}</td>
-                                            <td>{valorFormatado.format(dado.VALOR)}</td>
-                                            <td>{valorFormatado.format(dado.TOTAL_INVESTIDO)}</td>
+                                            <td>{FormataMoeda(dado.VALOR)}</td>
+                                            <td>{FormataMoeda(dado.TOTAL_INVESTIDO)}</td>
                                             <td>{dado.TIPO_MOVIMENTACAO}</td>
                                         </tr>
 
@@ -70,3 +74,4 @@ if(isEnable){
     }
 
 }
+export default MovimentacaoAtivo;
