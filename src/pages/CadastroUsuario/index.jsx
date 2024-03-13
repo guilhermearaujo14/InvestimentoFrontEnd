@@ -62,25 +62,25 @@ function CadastroUsuario(){
             </div>
             <div className="container-form-cadastro">
                 <form className="formulario-cadastro" onSubmit={validaDados} method="post">
-                    <label htmlFor="nome">Nome</label>
+                    <label htmlFor="nome">Nome*</label>
                     <input type="text" placeholder="Digite seu nome..." name="nome" required value={usuario.nome} onChange={(e)=> setUsuario({...usuario, nome: e.target.value})}/>
 
-                    <label htmlFor="cpf">CPF</label>
-                    <input type="text" placeholder="Digite seu CPF..."  name="cpf" value={usuario.cpf} onChange={(e)=>setUsuario({...usuario, cpf: e.target.value})}/>
+                    <label htmlFor="cpf">CPF*</label>
+                    <input type="text" placeholder="Digite seu CPF..."  name="cpf" required value={usuario.cpf} onChange={(e)=>setUsuario({...usuario, cpf: e.target.value})}/>
 
                     <label htmlFor="dataNascimento">Data de Nascimento</label>
                     <input type="date" name="dataNascimento" value={usuario.dataNascimento} onChange={(e)=>setUsuario({...usuario, dataNascimento: e.target.value})}/>
 
-                    <label htmlFor="email">E-mail</label>
-                    <input type="email" placeholder="Digite seu E-mail..."  name="email" value={usuario.email} onChange={(e)=>setUsuario({...usuario, email: e.target.value})}/>
+                    <label htmlFor="email">E-mail*</label>
+                    <input type="email" placeholder="Digite seu E-mail..."  name="email" required value={usuario.email} onChange={(e)=>setUsuario({...usuario, email: e.target.value})}/>
 
                     <label htmlFor="telefone">Telefone</label>
-                    <input type="number" placeholder="Digite seu telefone..."  name="telefone" value={usuario.telefone} onChange={(e)=>setUsuario({...usuario, telefone: e.target.value})}/>
+                    <input type="number" placeholder="Digite seu telefone..."  name="telefone"  value={usuario.telefone} onChange={(e)=>setUsuario({...usuario, telefone: e.target.value})}/>
 
-                    <label htmlFor="senha">Senha</label>
+                    <label htmlFor="senha">Senha*</label>
                     <input type="password" placeholder="Digite sua senha..."  name="senha" value={usuario.senha} onChange={(e)=>setUsuario({...usuario, senha: e.target.value})}/>
 
-                    <label htmlFor="confirmaSenha">Confirma Senha</label>
+                    <label htmlFor="confirmaSenha">Confirma Senha*</label>
                     <input type="password" placeholder="Digite a confirmação da sua senha..."  name="confirmaSenha" value={usuario.confirmaSenha} onChange={(e)=>setUsuario({...usuario, confirmaSenha: e.target.value})}/>
                     
                     <div className="container-botao-form">
@@ -88,6 +88,9 @@ function CadastroUsuario(){
                     </div>
                     
                 </form>
+                <div className="container-info">
+                    <span>Todos os campos que possuem * são de preenchimento obrigatório.</span>
+                </div>
             </div>
             <ToastContainer />
         </div>

@@ -1,7 +1,11 @@
 
 function FormataMoeda(valor){
-    let valorFormatado = valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-    return valorFormatado
+    if(valor === undefined || valor == 0){
+        0
+    }else{
+        let valorFormatado = valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        return valorFormatado
+    }
 }
 
 export default FormataMoeda;

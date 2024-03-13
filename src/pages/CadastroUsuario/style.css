@@ -82,3 +82,7 @@
     color: #222;
     transition: 0.8s;
 }
+.container-info{
+    margin-top: 10px;
+    font-size: 0.9em;
+}
