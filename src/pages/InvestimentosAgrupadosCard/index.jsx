@@ -3,6 +3,8 @@ import './style.css'
 import { useEffect, useState } from "react"
 import ModalAdicionarPapel from '../../components/Modal/ModalAdicionarPapel';
 import MovimentacaoAtivo from '../../components/Modal/MovimentacaoAtivo';
+import FormataMoeda from "../../utils/FormataMoeda";
+
 
 // eslint-disable-next-line react/prop-types
 function InvestimentosAgrupadosCard({ dadosList }){
@@ -71,22 +73,22 @@ function AbrirRelatorioComprasAtivo(ticket){
                                         </div>
                                     </div>
                                     <div className="item-valor-atual">
-                                        Preço { new Intl.NumberFormat('pt-BR',{style: 'currency', currency:'BRL'}).format(item.VALOR_ATUAL)}
+                                        Preço { FormataMoeda(item.VALOR_ATUAL)}
                                     </div>
                                     <div className="item-preco-medio">
                                         Quantidade {item.QUANTIDADE}
                                     </div>
                                     <div className="item-descricao">
-                                        Preço médio {new Intl.NumberFormat('pt-BR',{style: 'currency', currency:'BRL'}).format(item.PRECO_MEDIO)}
+                                        Preço médio {FormataMoeda(item.PRECO_MEDIO)}
                                     </div>
                                     <div className="item-descricao">
-                                        Valor investido {new Intl.NumberFormat('pt-BR',{style: 'currency', currency:'BRL'}).format(item.TOTAL_INVESTIDO)}
+                                        Valor investido {FormataMoeda(item.TOTAL_INVESTIDO)}
                                     </div>
                                     <div className="item-descricao">
-                                        Valor investido atual {new Intl.NumberFormat('pt-BR',{style: 'currency', currency:'BRL'}).format(item.TOTAL_INVESTIDO_ATUAL)}
+                                        Valor investido atual {FormataMoeda(item.TOTAL_INVESTIDO_ATUAL)}
                                     </div>
                                     <div className={item.LUCRO_PERDA >= 0 ? "item-lucro" : "item-perda"}>
-                                       Lucro/Perda R$ {item.LUCRO_PERDA.toFixed(2)}
+                                       Lucro/Perda R$ {FormataMoeda(item.LUCRO_PERDA)}
                                     </div>
                                     <div className="item-acoes">
                                         <div className='item-acao-especifico' title='Editar'>
