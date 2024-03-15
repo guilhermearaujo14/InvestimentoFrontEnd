@@ -1,4 +1,4 @@
-import { FaRegEdit,FaList, FaRegPlusSquare } from "react-icons/fa"
+import { FaList, FaRegPlusSquare } from "react-icons/fa"
 import './style.css'
 import { useEffect, useState } from "react"
 import ModalAdicionarPapel from '../../components/Modal/ModalAdicionarPapel';
@@ -91,9 +91,6 @@ function AbrirRelatorioComprasAtivo(ticket){
                                        Lucro/Perda R$ {FormataMoeda(item.LUCRO_PERDA)}
                                     </div>
                                     <div className="item-acoes">
-                                        <div className='item-acao-especifico' title='Editar'>
-                                            <FaRegEdit size={17} />
-                                        </div>
                                         <div className='item-acao-especifico' title={`Listar compras ${item.PAPEL}`} onClick={()=> AbrirRelatorioComprasAtivo(item.PAPEL)}>
                                             <FaList size={17} />
                                         </div>

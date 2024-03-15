@@ -19,9 +19,9 @@ function Navbar(){
             </div>
             <div className="nav-menu">
                 <ul className='nav-list'>
-                    <li className='list-item'><Link to='/home'>Home</Link></li>
-                    <li className='list-item'><Link to='/InvestimentosAgrupados'>Investimentos</Link></li>
-                    <li className='list-item'><Link to='/RelatorioCompras'>Relatórios</Link></li>
+                    <Link to='/home'><li className='list-item'>Home</li></Link>
+                    <Link to='/InvestimentosAgrupados'><li className='list-item'>Investimentos</li></Link>
+                    <Link to='/RelatorioCompras'><li className='list-item'>Relatórios</li></Link>
                 </ul>
             </div>
             <div className="log-out">
