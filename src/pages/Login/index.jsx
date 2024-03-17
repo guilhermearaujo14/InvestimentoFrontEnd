@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import './style.css';
 import Carregando from '../../components/Modal/Carregando/Carregando';
 
+import Proventos from '../../components/Modal/ModalAdicionarProventos';
+
 function Login(){
 
     const [isCarregando, setIsCarregando] = useState(false)
@@ -73,6 +75,7 @@ try {
                 <Link to={'/Proventos'}> Proventos</Link>
             </div>
             <Carregando isOpen={isCarregando} mensagem={''}/>
+            <Proventos isOpen={true} />
         </div>
     )
 }
