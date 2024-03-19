@@ -9,7 +9,8 @@ function AdicionarProventos({ isOpen }){
     let meses = MontaListaMeses();
     const [proventos, setProventos] = useState({mes: '', anoForm: ano, papel: '', valorUnitario: ''})
     
-    return(
+if(isOpen){
+   return(
         <div className="container-modal">
             <div className="container-modal-corpo">
                 <div className="container-modal-header">
@@ -60,6 +61,9 @@ function AdicionarProventos({ isOpen }){
             </div>
         </div>
     )
+}else{
+    null
+}
 }
 
 export default AdicionarProventos;

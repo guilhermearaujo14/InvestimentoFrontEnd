@@ -75,7 +75,7 @@ try {
                 <Link to={'/Proventos'}> Proventos</Link>
             </div>
             <Carregando isOpen={isCarregando} mensagem={''}/>
-            <Proventos isOpen={true} />
+            <Proventos isOpen={false} />
         </div>
     )
 }

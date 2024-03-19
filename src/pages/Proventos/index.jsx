@@ -1,32 +1,22 @@
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import NavBar from '../../components/navbar'
 import './style.css';
 
+import dados from './dados';
+import FormataMoeda from '../../utils/FormataMoeda'
 
 export default function Proventos(){
-    const [mesRef, setMesRef] = useState();
-    const [anoRef, setAnoRef] = useState(0);
-    const [dadosProventos, setDadosProventos] = useState([]);
-    const [ticket, setTicket] = useState('');
-    const [valor, setValor] = useState();
-
-    const meses = [{id: 0, nome:'-'}, {id: 1, nome:'Janeiro'}, {id: 2, nome:'Fevereiro'},{id: 3, nome:'Março'},{id: 4, nome:'Abril'},{id: 5, nome:'Maio'},{id: 6, nome:'Junho'},
-    {id: 7, nome:'Julho'},{id: 8, nome:'Agosto'},{id: 9, nome:'Setembro'},{id: 10, nome:'Outubro'},{id: 11, nome:'Novembro'},{id: 12, nome:'Dezembro'}]
+    const dadosProventos = dados;
+    const [totalPeriodo, setTotalPeriodo] = useState(0)
+console.log(dados)
     
-
-     const Adicionar = (e)=>{
-        e.preventDefault()
-        setDadosProventos((prevDadosProventos) => [...prevDadosProventos,{
-            mes: mesRef,
-            ano: anoRef,
-            ticket: ticket,
-            valor: valor
-        }])
-
-        setTicket('')
-        setValor('')
-    }
-
+function somaTotal(){
+    const totalPeriodo = dados.reduce((total, item) => total + item.VALOR,0)
+   setTotalPeriodo(totalPeriodo)
+}
+useEffect(()=>{
+    somaTotal()
+},[])
         return(
         <div className="container-proventos">
             <div className="navbar">
@@ -37,48 +27,41 @@ export default function Proventos(){
                 <div className="container-proventos-titulo">
                     <h1>Tela Proventos</h1>
                 </div>
-                <div className="container-cabecalho">
-                        <div className="input-meses">
-                            <label htmlFor="mes">Mês referência</label>
-                            <select name="mes" id="mes" value={mesRef} onChange={(e)=>setMesRef(e.target.value)}>
-                                {
-                                    meses.map((mes)=>
-                                    <option  key={mes.id} >{mes.nome}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <div className="input-ano">
-                            <label htmlFor="ano">Ano referência</label>
-                            <input type="number" name="ano" id="ano" placeholder='Informe o ano' value={anoRef} onChange={(e)=> setAnoRef(e.target.value)} />
-                        </div>
-                        <div className="input-ticket">
-                            <label htmlFor="ticket">Ticket</label>
-                            <input type="text" name="ticket" id="ticket" value={ticket} onChange={(e)=>setTicket(e.target.value)}/>
-                        </div>
-                        <div className="input-valor">
-                            <label htmlFor="valor">Valor</label>
-                            <input type="number" name="valor" id="valor" value={valor} onChange={(e)=>setValor(e.target.value)} />
-                        </div>
-                    <div className="contaier-btn-adicionar">
-                        <button onClick={Adicionar}>ADICIONAR</button>
-                    </div>
+                <div className="container-proventos-filtros">
+
                 </div>
-                <div className="container-list-proventos">
-                    <ul>
-                        {
-                            dadosProventos.map((provento, index)=>{
-                                return(
-                                    <li key={index}>
-                                        <span>{provento.ano} </span>
-                                        <span>{provento.mes} </span>
-                                        <span>{provento.ticket} </span>
-                                        <span>{provento.valor} </span>
-                                    </li>
-                                )})
-                            }
-                    </ul>
+                <div className="container-proventos-table">
+                    
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>TICKET</td>
+                                    <td>MÊS</td>
+                                    <td>VALOR</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                    {
+                                        
+                                        dadosProventos.map((item)=>{
+                                            return(
+                                                <tr key={item.ID}>
+                                                    <td>{item.PAPEL}</td>
+                                                    <td>{item.MES}</td>
+                                                    <td>{FormataMoeda(item.VALOR)}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                <tr>
+                                    <td><span>Total Periodo</span>{FormataMoeda(totalPeriodo)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    
                 </div>
+
             </div>
         </div>
     )
