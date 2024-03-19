@@ -9,6 +9,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoCloudUpload } from "react-icons/io5";
 import ModalAdicionarPapel from '../../components/Modal/ModalAdicionarPapel';
 import InvestimentosAgrupadosCard from '../InvestimentosAgrupadosCard';
+import CarregandoDados from '../../components/CarregandoDados';
 
 import './style.css';
 
@@ -49,9 +50,7 @@ function InvestimentosAgrupados(){
 
     if(!dados){
         return(
-            <div className="container-carregando">
-                <h1>Carregando dados</h1>
-            </div>
+            <CarregandoDados />
         )
     }
 

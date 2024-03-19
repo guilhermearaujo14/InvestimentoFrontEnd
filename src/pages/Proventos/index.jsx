@@ -3,12 +3,15 @@ import NavBar from '../../components/navbar'
 import './style.css';
 
 import dados from './dados';
-import FormataMoeda from '../../utils/FormataMoeda'
+import FormataMoeda from '../../utils/FormataMoeda';
+
+import CarregandoDados from '../../components/CarregandoDados';
 
 export default function Proventos(){
     const dadosProventos = dados;
     const [totalPeriodo, setTotalPeriodo] = useState(0)
-console.log(dados)
+
+    let isCarregando = true
     
 function somaTotal(){
     const totalPeriodo = dados.reduce((total, item) => total + item.VALOR,0)
@@ -17,6 +20,16 @@ function somaTotal(){
 useEffect(()=>{
     somaTotal()
 },[])
+
+
+
+if(isCarregando){
+    return(
+        <CarregandoDados />
+    )
+}
+
+
         return(
         <div className="container-proventos">
             <div className="navbar">
