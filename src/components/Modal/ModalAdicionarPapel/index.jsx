@@ -23,7 +23,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
         nomeEmpresa: '',
         setor: '',
         dataCompra: '',
-        tipoAtivoId: '',
         usuarioID: UsuarioID
     })
 
@@ -47,8 +46,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
             toast.warning('Ops.. Total deve ser preenchido, verifique!', {position: 'top-center'})
         }else if(!papel.dataCompra){
             toast.warning('Ops.. A data da compra deve ser preenchido, verifique!', {position: 'top-center'})
-        }else if(!papel.tipoAtivoId){
-            toast.warning('Ops.. O tipo do ativo deve ser selecionado, verifique!', {position: 'top-center'})
         }else if(!UsuarioID){
             toast.warning('Ops.. Usuário deve estar logado, verifique!', {position: 'top-center'})
         }else{
@@ -61,37 +58,16 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
         setIsCarregando(false)
     }
 
-    async function listaTipoAtivos(){
-        try {
-            const resultTipoAtivos = await api.get('tipoAtivos/');
-            setTipoAtivosDados(resultTipoAtivos.data);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    function preencheSelect(e){
-        if(isEdit){
-            const tipoAtivo = e.target.value;
-            setPapel((papelAnterior)=>({
-                ...papelAnterior, tipoAtivoId: tipoAtivo
-            }))        
-        }else{
-            setPapel({...papel, tipoAtivoId: e.target.value})
-        }
-    }
-
 
     async function salvar(){
         setIsCarregando(false)
+        let result = []
         try {
             if(isEdit === false){
-
-                const result = await api.post('/investimento/',{
+                    result = await api.post('/investimento/',{
                     "PAPEL": papel.ticket,
                     "QUANTIDADE":papel.quantidade, 
-                    "VALOR": papel.valor, 
-                    "TIPO_ATIVO_ID": parseInt(papel.tipoAtivoId),  
+                    "VALOR": papel.valor,
                     "NOME_EMPRESA": papel.nomeEmpresa, 
                     "SETOR": papel.setor, 
                     "DATA_COMPRA": papel.dataCompra,
@@ -100,10 +76,25 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                     "isVENDA": 0
                 });
                 console.log(result.data)
-                await toast.success(result.data.message, {position: 'top-center'});
             }else{
                 console.log('Aqui vai no editar')
             }
+
+            if(result.data.isSucesso){
+                toast.success(result.data.message, {position: 'top-center'});
+                setPapel({        
+                    ticket: '',
+                    quantidade: '',
+                    valor: '',
+                    total: '',
+                    nomeEmpresa: '',
+                    setor: '',
+                    dataCompra: '',
+                    usuarioID: UsuarioID})
+            }else{
+                toast.warning(result.data.message, {position: 'top-center'});
+            }
+
         } catch (error) {
             toast.warning(error.data)
         }
@@ -118,9 +109,8 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                 "ID": '',
                 "PAPEL": papel.ticket,
                 "QUANTIDADE":papel.quantidade, 
-                "VALOR": papel.valor, 
-                "TIPO_ATIVO_ID": parseInt(papel.tipoAtivoId),  
-                "NOME_EMPRESA": papel.nomeEmpresa, 
+                "VALOR": papel.valor,
+                "NOME_EMPRESA": papel.nomeEmpresa,
                 "SETOR": papel.setor, 
                 "DATA_COMPRA": papel.dataCompra,
                 "USUARIO_ID": UsuarioID, 
@@ -137,11 +127,9 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
 
     //Criação de um novo papel
     useEffect(()=>{
-        listaTipoAtivos()
+        
         if(isEdit && investimento){
             const date = new Date(investimento.DATA_COMPRA)
-            const tipoSelecionado = tipoAtivosDados.filter((tipoAtivo)=> tipoAtivo.ID === investimento.TIPO_ATIVO_ID)
-            setSelectName(tipoSelecionado[0].DESCRICAO)
 
             setPapel({
                 ticket: investimento.PAPEL,
@@ -151,7 +139,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                 nomeEmpresa: investimento.NOME_EMPRESA,
                 setor: investimento.SETOR,
                 dataCompra: format(date, 'yyyy-MM-dd'),
-                tipoAtivoId: investimento.TIPO_ATIVO_ID,
                 usuarioID: UsuarioID
             })
         }else{
@@ -172,17 +159,11 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[ticketParamter, investimento])
 
-    //Preenche dropDown
-    useEffect(()=>{
-        listaTipoAtivos();
-        
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
 
 
 
-    if(isModalAberto && listaTipoAtivos && UsuarioID){
+
+    if(isModalAberto && UsuarioID){
 
 
     return(
@@ -201,17 +182,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                     <div className="container-formulario">
                         <form>
                         <div className='container-input-modal'>
-                                <label htmlFor="tipoAtivo">Tipo de ativo</label>
-                                    <select className='dropdown-tipo-ativo' name="select" onChange={preencheSelect} >
-                                    <option  value={papel.tipoAtivoId}>{selectName}</option>
-                                        {
-                                            tipoAtivosDados.map((item)=>{
-                                                return(                                       
-                                                        <option value={item.ID} key={item.ID}>{item.DESCRICAO}</option>                                        
-                                                )                                   
-                                            })
-                                        }
-                                    </select> 
                         </div>
                             <div className='container-input-modal'>
                                 <label htmlFor="ticket">Ticket</label>
