@@ -32,12 +32,13 @@ async function Logar(e){
     isValidados = ValidaDados();
     if(isValidados.isSucesso){
 try {
-        const result = await apiLogin.post('login',{
+        const result = await apiLogin.post('Login',{
             "CPF": cpf, 
             "SENHA": senha
         })
-        toast.success(`Bem-vindo ${result.data.usuario}!`)
-        sessionStorage.setItem('UsuarioID', result.data.id );
+        console.log(result)
+        toast.success(`${result.data.message}!`)
+        sessionStorage.setItem('UsuarioID', result.data.usuario_id );
         sessionStorage.setItem('UserName', result.data.usuario);
 
         navigate("/home")
