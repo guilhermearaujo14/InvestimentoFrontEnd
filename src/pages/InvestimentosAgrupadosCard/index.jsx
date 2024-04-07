@@ -73,7 +73,7 @@ function AbrirRelatorioComprasAtivo(ticket){
                                         </div>
                                     </div>
                                     <div className="item-valor-atual">
-                                        Preço { FormataMoeda(item.VALOR_ATUAL)}
+                                        Preço { FormataMoeda(item.COTACAO)}
                                     </div>
                                     <div className="item-preco-medio">
                                         Quantidade {item.QUANTIDADE}
@@ -85,10 +85,10 @@ function AbrirRelatorioComprasAtivo(ticket){
                                         Valor investido {FormataMoeda(item.TOTAL_INVESTIDO)}
                                     </div>
                                     <div className="item-descricao">
-                                        Valor investido atual {FormataMoeda(item.TOTAL_INVESTIDO_ATUAL)}
+                                        Valor investido atual {FormataMoeda(item.TOTAL_ATUAL)}
                                     </div>
-                                    <div className={item.LUCRO_PERDA >= 0 ? "item-lucro" : "item-perda"}>
-                                       Lucro/Perda R$ {FormataMoeda(item.LUCRO_PERDA)}
+                                    <div className={item.PERDA_LUCRO >= 0 ? "item-lucro" : "item-perda"}>
+                                       Lucro/Perda R$ {FormataMoeda(item.PERDA_LUCRO)}
                                     </div>
                                     <div className="item-acoes">
                                         <div className='item-acao-especifico' title={`Listar compras ${item.PAPEL}`} onClick={()=> AbrirRelatorioComprasAtivo(item.PAPEL)}>

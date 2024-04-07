@@ -7,9 +7,9 @@ function Contador({ valor, titulo, porcentagem}){
 
     return(
 
-        <div className="container-item-contador">
+        <div className="container-item-contador" style={{display:  valor > 0 ? "" : "none"}}>
             <span className='porcentagem-valor'>{ FormataMoeda(valor)}</span>
-            <span className='porcentagem'>{ porcentagem + '%' }</span>
+            <span className='porcentagem'>{ porcentagem.toFixed(2) + '%' }</span>
             <span>{ titulo }</span>
         </div>
     )

@@ -33,10 +33,10 @@ function Home(){
         async function CarregarDadosTela(UsuarioID){
             setIsCarregando(true)
             try {
-                const result = await api.get(`Totalizadores/${UsuarioID}`);
+                const result = await api.get(`totalizadores/${UsuarioID}`);
                 let [data] = await result.data;
                 setDados(data)
-                //console.log(dados);
+                console.log(dados);
             } catch (error) {
                 toast.warning(error.message, {position: 'top-center'})
             }finally{
@@ -52,11 +52,12 @@ function Home(){
                 <h1 className='titulo-saudacao'>Bem-Vindo, {UsuarioLogado}!</h1>
             </div>
             <div className="container-contadores">
-                            <Contador valor={dados.TotalGeral} titulo='Total' porcentagem={100} />
-                            <Contador valor={dados.TotalAcoes} titulo='Ações' porcentagem={dados.PorcentagemAcoes} />
-                            <Contador valor={dados.TotalFiis} titulo='FIIs' porcentagem={dados.PorcentagemFiis} />
-                            <Contador valor={dados.TotalETF} titulo='ETFs' porcentagem={dados.PorcentagemETF} />
-                            <Contador valor={dados.TotalBDR} titulo='BDRs' porcentagem={dados.PorcentagemBDR} />
+                            <Contador valor={dados.TOTAL_GERAL} titulo='Total' porcentagem={100} />
+                            <Contador valor={dados.TOTAL_ACOES} titulo='Ações' porcentagem={(dados.TOTAL_ACOES / dados.TOTAL_GERAL)*100} />
+                            <Contador valor={dados.TOTAL_FIIS} titulo='FIIs' porcentagem={(dados.TOTAL_FIIS / dados.TOTAL_GERAL)*100} />
+                            <Contador valor={dados.TOTAL_ETFS} titulo='ETFs' porcentagem={(dados.TOTAL_ETFS / dados.TOTAL_GERAL)*100} />
+                            <Contador valor={dados.TOTAL_BDRS} titulo='BDRs' porcentagem={(dados.TOTAL_BDRS / dados.TOTAL_GERAL)*100} />
+                            <Contador valor={dados.TOTAL_FI_AGRO} titulo='BDRs' porcentagem={(dados.TOTAL_FI_AGRO / dados.TOTAL_GERAL)*100} />
 
             </div>
         <Carregando isOpen={isCarregando} mensagem={''} />
