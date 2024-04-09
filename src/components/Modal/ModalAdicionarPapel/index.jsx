@@ -10,11 +10,9 @@ import { format } from 'date-fns';
 // eslint-disable-next-line react/prop-types
 function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, investimento}){
     const [isCarregando, setIsCarregando] = useState(false)
-    const [tipoAtivosDados, setTipoAtivosDados] = useState('') 
     const UsuarioID = sessionStorage.getItem("UsuarioID");
     let isModalAberto = isOpen;
     let isEditar = isEdit;
-    const [selectName, setSelectName] = useState('')
     const [papel, setPapel] = useState({
         ticket: ticketParamter,
         quantidade: '',
@@ -58,28 +56,21 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
         setIsCarregando(false)
     }
 
-
     async function salvar(){
         setIsCarregando(false)
         let result = []
         try {
             if(isEdit === false){
-                    result = await api.post('/investimento/',{
+                    result = await api.post(`/cadastraInvestimento/${UsuarioID}`,{
                     "PAPEL": papel.ticket,
-                    "QUANTIDADE":papel.quantidade, 
-                    "VALOR": papel.valor,
-                    "NOME_EMPRESA": papel.nomeEmpresa, 
                     "SETOR": papel.setor, 
+                    "QUANTIDADE_MOVIMENTACAO":papel.quantidade, 
+                    "PRECO": papel.valor,
                     "DATA_COMPRA": papel.dataCompra,
-                    "USUARIO_ID": UsuarioID,
                     "isCOMPRA": 1,
                     "isVENDA": 0
                 });
-                console.log(result.data)
-            }else{
-                console.log('Aqui vai no editar')
             }
-
             if(result.data.isSucesso){
                 toast.success(result.data.message, {position: 'top-center'});
                 setPapel({        
@@ -87,7 +78,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                     quantidade: '',
                     valor: '',
                     total: '',
-                    nomeEmpresa: '',
                     setor: '',
                     dataCompra: '',
                     usuarioID: UsuarioID})
@@ -102,23 +92,18 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
     }
 
     async function editar(){
-        setIsCarregando(false)
+        setIsCarregando(true)
         try {
-            console.log(papel)
-            const result = await api.post('/investimento/',{
-                "ID": '',
+            const result = await api.post(`/cadastraInvestimento/${UsuarioID}`,{
                 "PAPEL": papel.ticket,
-                "QUANTIDADE":papel.quantidade, 
-                "VALOR": papel.valor,
-                "NOME_EMPRESA": papel.nomeEmpresa,
                 "SETOR": papel.setor, 
+                "QUANTIDADE_MOVIMENTACAO":papel.quantidade, 
+                "PRECO": papel.valor,
                 "DATA_COMPRA": papel.dataCompra,
-                "USUARIO_ID": UsuarioID, 
-                "isCOMPRA": papel.isCOMPRA,
-                "isVENDA": papel.isVENDA
+                "isCOMPRA": 1,
+                "isVENDA": 0
             });
-            console.log(result.data)
-            await toast.success(result.data.message, {position: 'top-center'});
+            toast.success(result.data.message, {position: 'top-center'});
         } catch (error) {
             toast.warning(error.data)
         }
@@ -136,19 +121,16 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                 quantidade: investimento.QUANTIDADE ,
                 valor: investimento.VALOR,
                 total: investimento.TOTAL_INVESTIDO,
-                nomeEmpresa: investimento.NOME_EMPRESA,
                 setor: investimento.SETOR,
                 dataCompra: format(date, 'yyyy-MM-dd'),
                 usuarioID: UsuarioID
             })
         }else{
-            setSelectName('-')
             setPapel({
                 ticket: ticketParamter,
                 quantidade: '',
                 valor: '',
                 total: '',
-                nomeEmpresa: '',
                 setor: '',
                 dataCompra: '',
                 tipoAtivoId: '',
@@ -200,11 +182,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                                     <label htmlFor="total">Total</label>
                                     <input type='number' placeholder='Total' value={papel.total} disabled/>
                                 </div>
-                            </div>
-
-                            <div className='container-input-modal'>
-                                <label htmlFor="nomeEmpesa">Nome da Empesa</label>
-                                <input type='text' placeholder= 'Informe o nome da empresa' value={papel.nomeEmpresa} onChange={(e)=> setPapel({...papel, nomeEmpresa: e.target.value})}/>
                             </div>
 
                             <div className='container-input-modal'>
