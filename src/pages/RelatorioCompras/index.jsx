@@ -9,6 +9,7 @@ import {  useEffect, useState } from 'react';
 import api from '../../services/api';
 
 import { format } from 'date-fns'
+import FormataMoeda from '../../utils/FormataMoeda';
 
 export default function RelatorioCompras(){
     const UsuarioLogadoID = sessionStorage.getItem('UsuarioID');
@@ -20,6 +21,8 @@ export default function RelatorioCompras(){
     const [tipoAtivoId, setTipoAtivoId] = useState('')
     const [tipoAtivoNome, setTipoAtivoNome] = useState('-')
     const [isSomenteVenda, setIsSomenteVenda] = useState(true)
+    const [dataInicio, setDataInicio] = useState('');
+    const [dataFinal, setDataFinal] = useState('');
 
     function openModal(open){
         setIsOpenModal(open)
@@ -31,8 +34,8 @@ export default function RelatorioCompras(){
 
     async function carregaDados(){
         try {
-            const response = await api.get(`/compras/${UsuarioLogadoID}?PAPEL=${searchPapel}&TIPO_ATIVO_ID=${tipoAtivoId}`);
-            //console.log(response.data)
+            const response = await api.get(`/movimentacoes/${UsuarioLogadoID}?dataInicio=${dataInicio}&dataFinal=${dataFinal}&papel=${searchPapel}&tipo_ativo_id=${tipoAtivoId}`);
+            console.log(response.data)
             setDados(response.data)
 
         } catch (error) {
@@ -100,7 +103,7 @@ export default function RelatorioCompras(){
         setIsSomenteVenda(!isSomenteVenda)
         console.log(isSomenteVenda)
         if(isSomenteVenda == true){
-            let filterSomenteVenda = dados.filter((dado)=> dado.isVENDA == true || dado.DESCRICAO === searchPapel)
+            let filterSomenteVenda = dados.filter((dado)=> dado.TIPO == 'Venda' || dado.DESCRICAO === searchPapel)
             setDados(filterSomenteVenda)
         }else{
             carregaDados()
@@ -172,7 +175,7 @@ export default function RelatorioCompras(){
                         <tbody>
                             {
                                 dados.map((dado)=>{
-                                    let data = new Date(dado.DATA_COMPRA)
+                                    let data = new Date(dado.DATA_MOVIMENTACAO)
                                     let dataFormatada = format(data, 'dd/MM/yyyy');
                                     return(
                                             <tr key={dado.ID}>
@@ -186,10 +189,10 @@ export default function RelatorioCompras(){
                                                 </td>
                                                 <td>{dado.PAPEL}</td>
                                                 <td>{dado.QUANTIDADE}</td>
-                                                <td>R$ {dado.VALOR.toFixed(2)}</td>
-                                                <td>R$ {dado.TOTAL_INVESTIDO.toFixed(2)}</td>
+                                                <td>{FormataMoeda(dado.PRECO)}</td>
+                                                <td>{FormataMoeda(dado.TOTAL)}</td>
                                                 <td> {dataFormatada} </td>
-                                                <td>{dado.DESCRICAO}</td>
+                                                <td>{dado.TIPO}</td>
                                             </tr>
                                         )
                                 })
