@@ -65,7 +65,8 @@ function AbrirRelatorioComprasAtivo(ticket){
                                     style={{
                                         backgroundColor: item.DESCRICAO === "Fundo Imobiliario" ?  "#00945a" : 
                                         item.DESCRICAO === "Ação" ? "#88abc2" : 
-                                        item.DESCRICAO === "ETF" ? "#317F8F": "#2000FF", borderRadius: '4px'}}>
+                                        item.DESCRICAO === "ETF" ? "#317F8F": 
+                                        item.DESCRICAO === "BDR" ? "#2000FF": "#f96153" ,  borderRadius: '4px'}}> 
                                     
                                         {item.PAPEL} 
                                         <div className="item-descricao">

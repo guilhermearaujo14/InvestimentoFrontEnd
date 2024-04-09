@@ -114,7 +114,8 @@ export default function RelatorioCompras(){
         {"ID": 1, "DESCRICAO": 'Ações' },
         {"ID": 2, "DESCRICAO": 'Fundos Imobiliarios' },
         {"ID": 3, "DESCRICAO": 'ETF' },
-        {"ID": 4, "DESCRICAO": 'BDR' }]
+        {"ID": 4, "DESCRICAO": 'BDR' },
+        {"ID": 5, "DESCRICAO": 'Fundo de investimentos' }]
     return(
         <div className="container-relatorio-compras">
             <div className="container-navbar">
