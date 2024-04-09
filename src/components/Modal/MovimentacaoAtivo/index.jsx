@@ -13,7 +13,7 @@ if(isEnable){
 
         // eslint-disable-next-line no-inner-declarations
         async function GetDadosbyTicket(){
-            const response = await api.get(`/movimentacoesByPapel/${usuarioLogadoId}/${ticket}`)
+            const response = await api.get(`/movimentacoes/${usuarioLogadoId}?papel=${ticket}`)
             console.log(response.data)
             setDados(response.data)
         }
@@ -53,11 +53,11 @@ if(isEnable){
                                     
                                     return(
                                         <tr key={index}>
-                                            <td>{FormataData(dado.DATA_COMPRA)}</td>
+                                            <td>{FormataData(dado.DATA_MOVIMENTACAO)}</td>
                                             <td>{dado.QUANTIDADE}</td>
-                                            <td>{FormataMoeda(dado.VALOR)}</td>
-                                            <td>{FormataMoeda(dado.TOTAL_INVESTIDO)}</td>
-                                            <td>{dado.TIPO_MOVIMENTACAO}</td>
+                                            <td>{FormataMoeda(dado.PRECO)}</td>
+                                            <td>{FormataMoeda(dado.TOTAL)}</td>
+                                            <td>{dado.TIPO}</td>
                                         </tr>
 
                                     )
