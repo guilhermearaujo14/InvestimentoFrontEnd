@@ -57,7 +57,7 @@ function Home(){
                             <Contador valor={dados.TOTAL_FIIS} titulo='FIIs' porcentagem={(dados.TOTAL_FIIS / dados.TOTAL_GERAL)*100} />
                             <Contador valor={dados.TOTAL_ETFS} titulo='ETFs' porcentagem={(dados.TOTAL_ETFS / dados.TOTAL_GERAL)*100} />
                             <Contador valor={dados.TOTAL_BDRS} titulo='BDRs' porcentagem={(dados.TOTAL_BDRS / dados.TOTAL_GERAL)*100} />
-                            <Contador valor={dados.TOTAL_FI_AGRO} titulo='BDRs' porcentagem={(dados.TOTAL_FI_AGRO / dados.TOTAL_GERAL)*100} />
+                            <Contador valor={dados.TOTAL_FI_AGRO} titulo='Fundo de investimento' porcentagem={(dados.TOTAL_FI_AGRO / dados.TOTAL_GERAL)*100} />
 
             </div>
         <Carregando isOpen={isCarregando} mensagem={''} />

@@ -4,6 +4,7 @@ import NavBar from '../../components/navbar/index'
 import { VscArrowLeft } from 'react-icons/vsc';
 import { toast } from 'react-toastify';
 import  Carregando  from '../../components/Modal/Carregando/Carregando';
+import FormataMoeda from '../../utils/FormataMoeda';
 
 
 import api from '../../services/api'; 
@@ -25,7 +26,7 @@ export default function Venda(){
         if(!searchPapel){
             toast.warning('Ops... Campo de pesquisa não foi preenchido, verifique!',{position: 'top-center'})
         }
-        const response = await api.get(`investimentoVenda/${UsuarioLogadoID}?PAPEL=${searchPapel}`)
+        const response = await api.get(`investimento/${UsuarioLogadoID}?PAPEL=${searchPapel}`)
         const result = response.data;
         if(result.length === 0){
             toast.warning('Ops... Registro não encontrado, verifique!',{position: 'top-center'})
@@ -33,13 +34,11 @@ export default function Venda(){
             return
         }
         setQuantidadeVenda(result[0].QUANTIDADE)
-        setvalorVenda(result[0].VALOR_ATUAL)
+        setvalorVenda(result[0].COTACAO)
         setSearchPapel(result[0].PAPEL)
         setDados(result)
 
         setIsExibeDados(true)
-
-        console.log(dados)
         setIsCarregando(false)
     }
 
@@ -79,17 +78,18 @@ export default function Venda(){
     async function RegistrarVenda(e){
         e.preventDefault();
         const isFormValido = ValidaForm()
-        console.log(isFormValido)
         if(isFormValido){
-            console.log(searchPapel, quantidadeVenda, valorVenda, dataVenda)
-            const response = await api.post(`regitrarVenda/${UsuarioLogadoID}`,{
+            const response = await api.post(`cadastraInvestimento/${UsuarioLogadoID}`,{
                 "PAPEL": searchPapel,
-                "QUANTIDADE": quantidadeVenda,
-                "VALOR": valorVenda,
-                "DATA_COMPRA": dataVenda
+                "SETOR": dados.SETOR,
+                "QUANTIDADE_MOVIMENTACAO": quantidadeVenda,
+                "PRECO": valorVenda,
+                "DATA_COMPRA": dataVenda,
+                "isCOMPRA": 0,
+                "isVENDA": 1
             })
-            console.log(response.data)
-            toast.success(response.data[0].msg ,{position: 'top-center'})
+            
+            toast.success(response.data.message ,{position: 'top-center'})
             setSearchPapel('')
             setDados([])
         }else{
@@ -123,9 +123,9 @@ export default function Venda(){
                                                 <form onSubmit={RegistrarVenda} className="container-venda-resultado-pesquisa">
                                                     <span>Tipo: {dado.DESCRICAO}</span>
                                                     <span>Setor: {dado.SETOR}</span>
-                                                    <span>Preço médio: R$ {dado.PRECO_MEDIO.toFixed(2)}</span>
-                                                    <span>Total investido: R$ {dado.TOTAL_INVESTIDO.toFixed(2)}</span>
-                                                    <span>Total atual: R$ {dado.TOTAL_INVESTIDO_ATUAL.toFixed(2)}</span>    
+                                                    <span>Preço médio: {FormataMoeda(dado.PRECO_MEDIO)}</span>
+                                                    <span>Total investido: {FormataMoeda(dado.TOTAL_INVESTIDO)}</span>
+                                                    <span>Total atual:{FormataMoeda(dado.TOTAL_INVESTIDO_ATUAL)}</span>    
 
                                                     <div className="container-input-quantidade-valor" style={{display: isExibeDados == false ? 'none' : ''}}>
                                                         <label htmlFor="quantidade">Quantidade</label>

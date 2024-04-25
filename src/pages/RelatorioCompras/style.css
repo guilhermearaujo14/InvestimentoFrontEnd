@@ -8,6 +8,9 @@
     box-sizing: border-box;
     width: 100vw;
 }
+.container-navbar{
+    position: fixed;
+}
 .container-header-relatorio-compras{
     display: flex;
     flex-direction: column;
@@ -19,6 +22,7 @@
     box-sizing: border-box;
     align-items: center;
     padding: 0px;
+    margin-top: 60px;
 }
 .container-titulo-relatorio-compras{
     display: flex;
@@ -28,18 +32,25 @@
 }
 .container-filtros{
     display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
+    flex-direction: column;
+    /* box-sizing: border-box; */
     width: 90vw;
-    margin: 20px 0 10px 0;
+    margin: 10px 0 10px 0;
     padding: 8px;
+    border: 1px solid #7d7d7d99;
+    border-radius: 6px;
+}
+.container-filtros-linha{
+    display: flex;
+    flex-direction: row;
     gap: 10px;
 }
 .container-filtro-item{
-    width: 20%;
     display: flex;
     flex-direction: column;
+    width: 500px;
 }
+
 .container-filtro-item > input{
     height: 30px;
     border-radius: 4px;
@@ -92,7 +103,7 @@
 .table-relatorio-compras{
     background-color: #444;
     width: 90vw;
-    
+    border-radius: 6px;
 }
 .table-relatorio-compras > thead > tr{
     background-color: #111;

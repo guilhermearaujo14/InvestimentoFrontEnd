@@ -17,7 +17,7 @@ function InvestimentosAgrupadosCard({ dadosList }){
     useEffect(()=>{
         setDados(dadosList) 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[dadosList])
 
     function openModal(open){
         setIsOpenModal(open)

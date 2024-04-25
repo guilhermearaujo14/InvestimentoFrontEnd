@@ -27,10 +27,8 @@ function InvestimentosAgrupados(){
         try {
             const response = await api.get(`meusInvestimentos/${UsuarioLogadoID}`);
             setDados(response.data)
-            console.log(dados)
         } catch (error) {
             toast.warning(error, {position: 'top-center'})
-            console.log(error)
         }
     }
 
@@ -39,13 +37,15 @@ function InvestimentosAgrupados(){
     }
     function fechaModal(){
         setIsOpenModal(!open)
+        setDados([])
+        BuscaInvestimentos()
     }
     
 
 
     useEffect(()=>{
+        setTicketOpenModal()
         BuscaInvestimentos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     if(!dados){
@@ -73,7 +73,7 @@ function InvestimentosAgrupados(){
                 </div>
                 <div className="container-actions-investimentos-agrupados">
 
-                    <button className='btn-adicionar-investimento' onClick={()=>{setTicketOpenModal(''), openModal(true, '')}}>
+                    <button className='btn-adicionar-investimento' onClick={()=>{setTicketOpenModal(), openModal(true)}}>
                         <CiCirclePlus size={16} />
                         Adicionar ativo
                     </button>
@@ -97,7 +97,7 @@ function InvestimentosAgrupados(){
             <div className="container-lista">
                 <InvestimentosAgrupadosCard dadosList={dados} />
             </div>
-           <ModalAdicionarPapel isOpen={isOpenModal} ticketParamter={ticketOpenModal} fechaModal={fechaModal} isEdit={false} investimento={''} />
+           <ModalAdicionarPapel isOpen={isOpenModal} ticketParamter={ticketOpenModal} fechaModal={()=>fechaModal('')} isEdit={false} investimento={''} />
         </div>
     )
 

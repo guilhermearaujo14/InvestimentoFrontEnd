@@ -36,12 +36,17 @@ try {
             "CPF": cpf, 
             "SENHA": senha
         })
-        console.log(result)
-        toast.success(`${result.data.message}!`)
-        sessionStorage.setItem('UsuarioID', result.data.usuario_id );
-        sessionStorage.setItem('UserName', result.data.usuario);
 
-        navigate("/home")
+        if(result.data.isSucesso){
+            console.log(result)
+            toast.success(`${result.data.message}!`)
+            sessionStorage.setItem('UsuarioID', result.data.usuario_id );
+            sessionStorage.setItem('UserName', result.data.usuario);
+            navigate("/home")
+        }else{
+            toast.warning(`${result.data.message}!`)
+        }
+
         
         } catch (error) {
             console.log(error)

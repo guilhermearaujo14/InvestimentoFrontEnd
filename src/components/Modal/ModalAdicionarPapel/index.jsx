@@ -62,7 +62,7 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
         try {
             if(isEdit === false){
                     result = await api.post(`/cadastraInvestimento/${UsuarioID}`,{
-                    "PAPEL": papel.ticket,
+                    "PAPEL": papel.ticket.toUpperCase(),
                     "SETOR": papel.setor, 
                     "QUANTIDADE_MOVIMENTACAO":papel.quantidade, 
                     "PRECO": papel.valor,
@@ -112,7 +112,6 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
 
     //Criação de um novo papel
     useEffect(()=>{
-        
         if(isEdit && investimento){
             const date = new Date(investimento.DATA_COMPRA)
 

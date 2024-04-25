@@ -13,6 +13,7 @@ function ImportacaoPlanilha(){
     const [dados, setDados] = useState([]);
     const [isCarregando, setIsCarregando] = useState(false)
     const usuarioLogado = sessionStorage.getItem("UsuarioID");
+    const [isPodeImportar, setIsPodeImportar] = useState(true)
     
     if(!usuarioLogado){
         return (
@@ -43,7 +44,6 @@ function ImportacaoPlanilha(){
                     <p>A coluna <strong>QUANTIDADE</strong> deve ser preenchida com a quantidade da compra realizada.</p>
                     <p>A coluna <strong>PREÇO</strong> deve ser preechido com o preço pago sem informar o R$.</p>
                     <p>A coluna <strong>DATA</strong> deve ser preenchida com a data da compra realizada no formato DIA/MÊS/ANO (exemplo: 01/01/2024).</p>
-                    <p>A coluna <strong>TIPO</strong> deve ser preenchida com NÚMEROS sendo 1 - AÇÃO, 2 - Fundo Imobiliário, 3 - ETF, 4 - BDR.</p>
                 </div>
                 <div className="container-input-importacao">
                     <label htmlFor="arquivo">Selecione o arquivo (csv)</label>
@@ -62,7 +62,6 @@ function ImportacaoPlanilha(){
                                 <td>Preço</td>
                                 <td>Total</td>
                                 <td>Data</td>
-                                <td>Tipo</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,7 +77,6 @@ function ImportacaoPlanilha(){
                                                 <td>{dado.preco}</td>
                                                 <td>{total}</td>
                                                 <td>{dado.data}</td>
-                                                <td>{dado.tipo}</td>
                                             </tr>
                                         )
                                     })
@@ -104,11 +102,14 @@ function ImportacaoPlanilha(){
 
 async function importarPlanilha(){
     setIsCarregando(true)
-    const isValido = validaPlanilhaImportada()
+    let isValido = isPodeImportar
+    await validaPlanilhaImportada()
     let response = [];
     if(isValido == true){
+        console.log('IMPORTANDO')
+        console.log(isPodeImportar)
         try {           
-            response = await api.post(`/RegistrarInvestimentoByPlanilha/${usuarioLogado}`,{
+            response = await api.post(`/importacaoPlanilha/${usuarioLogado}`,{
                 dados
             })
             console.log(response)
@@ -123,15 +124,36 @@ async function importarPlanilha(){
     setIsCarregando(false)
 }
 
-function validaPlanilhaImportada(){
+async function validaPlanilhaImportada(){
+    let listaGoogle = await BuscaListaGoogle();
     let isValido = true
-    dados.map((item, index)=>{
-        if(!item.papel || !item.quantidade || !item.preco || !item.data || !item.tipo){
+    dados.map(async (item, index)=>{
+        let isAtivoExiste = VerificaAtivo(listaGoogle, item.papel)
+        if(isAtivoExiste == false){
+            await setIsPodeImportar(false)
+            alert(`Ops... item ${item.papel} não existe - linha ${index}, verifique!` )
+        }
+        if(!item.papel || !item.quantidade || !item.preco || !item.data){
+            setIsPodeImportar(false)
             alert(`Ops... Existe um erro na linha ${index}` )
-            isValido = false
         }
     })
     return isValido
+}
+
+async function BuscaListaGoogle(){
+    const lista = await api.get('/listGoogle');
+    return lista;
+}
+
+function VerificaAtivo(lista, papel){
+    let listaGoogle = lista.data;
+    let ativo = listaGoogle.filter((ativo) => ativo.papel === papel.toUpperCase())
+    if(ativo.length > 0){
+        return true
+    }
+        setIsPodeImportar(false)
+        return false
 }
 
 }

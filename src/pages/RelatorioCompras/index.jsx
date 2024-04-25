@@ -19,10 +19,10 @@ export default function RelatorioCompras(){
     const [investimento, setInvestimento] = useState([])
     const [isEditar, setIsEditar] = useState(false)
     const [tipoAtivoId, setTipoAtivoId] = useState('')
-    const [tipoAtivoNome, setTipoAtivoNome] = useState('-')
     const [isSomenteVenda, setIsSomenteVenda] = useState(true)
     const [dataInicio, setDataInicio] = useState('');
     const [dataFinal, setDataFinal] = useState('');
+    const [tiposList, setTiposList] = useState([])
 
     function openModal(open){
         setIsOpenModal(open)
@@ -35,7 +35,6 @@ export default function RelatorioCompras(){
     async function carregaDados(){
         try {
             const response = await api.get(`/movimentacoes/${UsuarioLogadoID}?dataInicio=${dataInicio}&dataFinal=${dataFinal}&papel=${searchPapel}&tipo_ativo_id=${tipoAtivoId}`);
-            console.log(response.data)
             setDados(response.data)
 
         } catch (error) {
@@ -52,19 +51,25 @@ export default function RelatorioCompras(){
         )
     } 
 
-    const filtar = ()=>{
+    const filtrar = async ()=>{
         searchPapel.toLowerCase()
-        carregaDados()
+        await carregaDados()
     }
 
-    const limparFiltro = (papel)=>{
-        setSearchPapel(papel)
+    const limparFiltro = async ()=>{
+        PreencheTiposList();
+        await carregaDados();
+    }
+
+    async function refreshTable(){
+        setTiposList([])
+        setSearchPapel('')
         setTipoAtivoId('')
-        setTipoAtivoNome('-')
-        setIsSomenteVenda(!false)
-        if(!papel){
-            carregaDados()
-        }
+        setIsSomenteVenda(true)
+        setDataInicio('')
+        setDataFinal('')
+        limparFiltro()
+        
     }
 
     const editar = async (ID)=>{
@@ -77,7 +82,6 @@ export default function RelatorioCompras(){
 
     const remover = async (ID)=>{
         const result = await api.delete(`/investimento/${ID}`)
-        console.log(result.data)
         toast.success(result.data.MSG_Retorno,{position: 'top-center' })
         carregaDados()
     }
@@ -87,6 +91,7 @@ export default function RelatorioCompras(){
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(()=>{
+        PreencheTiposList()
         carregaDados()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
@@ -101,7 +106,6 @@ export default function RelatorioCompras(){
 
     const flagSomenteVenda = () =>{
         setIsSomenteVenda(!isSomenteVenda)
-        console.log(isSomenteVenda)
         if(isSomenteVenda == true){
             let filterSomenteVenda = dados.filter((dado)=> dado.TIPO == 'Venda' || dado.DESCRICAO === searchPapel)
             setDados(filterSomenteVenda)
@@ -110,12 +114,16 @@ export default function RelatorioCompras(){
         }
     }
 
-    const tiposList = [
+    function PreencheTiposList(){
+        setTiposList([ {"ID": 0, "DESCRICAO": '-' },
         {"ID": 1, "DESCRICAO": 'Ações' },
         {"ID": 2, "DESCRICAO": 'Fundos Imobiliarios' },
         {"ID": 3, "DESCRICAO": 'ETF' },
         {"ID": 4, "DESCRICAO": 'BDR' },
-        {"ID": 5, "DESCRICAO": 'Fundo de investimentos' }]
+        {"ID": 5, "DESCRICAO": 'Fundo de investimentos' }])
+    }
+    
+
     return(
         <div className="container-relatorio-compras">
             <div className="container-navbar">
@@ -123,23 +131,35 @@ export default function RelatorioCompras(){
             </div>
             <div className="container-main-relatorio-compras">
                 <div className="container-titulo-relatorio-compras">
-                    <h1>Todas as compras</h1>
+                    <h1>Movimentações</h1>
                 </div>
                 <div className="container-filtros">
+                <div className="container-filtros-linha">
+
+                    <div className='container-filtro-item'>
+                            <label htmlFor="papel">Data início</label>
+                            <input type="date"  value={dataInicio} onChange={(e)=> setDataInicio(e.target.value)} />
+                    </div>
+                    <div className='container-filtro-item'>
+                            <label htmlFor="papel">Data final</label>
+                            <input type="date"  value={dataFinal} onChange={(e)=> setDataFinal(e.target.value)} />
+                    </div>
+                    
                     <div className='container-filtro-item'>
                         <label htmlFor="papel">Papel</label>
                         <input type="text" placeholder='Digite o papel' value={searchPapel} onChange={(e)=> setSearchPapel(e.target.value)} />
                     </div>
+                    
                     <div className='container-filtro-item'>
                         <label htmlFor="tipo">Tipo</label>
                             <select className='dropdown' onChange={(e)=> setTipoAtivoId(e.target.value) }>
-                                <option value={tipoAtivoId}>{tipoAtivoNome}</option>
+                                {/* <option value={tipoAtivoId}>{tipoAtivoNome}</option> */}
                             {
                                 tiposList.map((tipo)=>{
-                                return (
-                                    <option value={tipo.ID} key={tipo.ID}>{tipo.DESCRICAO}</option>   
-                                )})
-                            }
+                                    return (
+                                        <option value={tipo.ID} key={tipo.ID}>{tipo.DESCRICAO}</option>   
+                                    )})
+                                }
                             </select>
                     </div>
 
@@ -147,14 +167,15 @@ export default function RelatorioCompras(){
                         <input className='checkbox' type="checkbox" checked={!isSomenteVenda} onChange={flagSomenteVenda} /> <span>Mostrar somente vendas</span>
                     </div>
 
+                </div>
 
                     <div className="container-filtro-botoes">
-                    <button onClick={()=>limparFiltro('')} className='btn-limpar'>
+                    <button onClick={refreshTable} className='btn-limpar'>
                             <FaEraser  className='icone-pesquisa' size={14} />
                             LIMPAR
                         </button>
 
-                        <button onClick={filtar} className='btn-filtar'>
+                        <button onClick={filtrar} className='btn-filtar'>
                             <FaSearch className='icone-pesquisa' size={14} />
                             FILTRAR
                         </button>
