@@ -1,18 +1,19 @@
 
 .container-corpo-modal{
+    margin-top: 20px;
     padding: 0;
     background-color: #aaa;
     width: 40%;
-    max-height: 700px;
 }
 .container-modal-cabecalho{
     display: flex;
     flex-direction: row;
     background-color: #000;
     height: 40px;
-    width: 100%;
+    width: auto;
     padding: 0 0 0 10px;
     color: #fff;
+    position: sticky;
 }
 .container-titulo-modal > h3{
     height: 40px;
@@ -39,12 +40,12 @@
 .container-table-movimentacao-ativo{
     width: 100%;
     max-height: 600px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 .table-movimentacoes-ativo{
     width: 100%;
     text-align: center;
-
+    margin-bottom: 30px;
 }
 .table-movimentacoes-ativo > thead > tr > td,
 .table-movimentacoes-ativo > tbody > tr > td{

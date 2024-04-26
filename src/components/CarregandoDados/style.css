@@ -18,16 +18,16 @@
 }
 .container-1{
     animation: animacao1 1s infinite;
-    animation-delay: 0.5s;
+    animation-delay: 0.2s;
 
 }
 .container-2{
     animation: animacao2 1s infinite;
-    animation-delay: 1.5s;
+    animation-delay: 0.4s;
 }
 .container-3{
     animation: animacao3 1s infinite;
-    animation-delay: 1.8s;
+    animation-delay: 0.6s;
 }
 @keyframes animacao1 {
     from{

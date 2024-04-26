@@ -81,8 +81,8 @@ export default function RelatorioCompras(){
     }
 
     const remover = async (ID)=>{
-        const result = await api.delete(`/investimento/${ID}`)
-        toast.success(result.data.MSG_Retorno,{position: 'top-center' })
+        const result = await api.delete(`/excluirMovimentacao/${UsuarioLogadoID}/${ID}`)
+        toast.success(result.data.message,{position: 'top-center' })
         carregaDados()
     }
 
