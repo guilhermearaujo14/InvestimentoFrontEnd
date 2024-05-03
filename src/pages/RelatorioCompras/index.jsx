@@ -73,11 +73,11 @@ export default function RelatorioCompras(){
     }
 
     const editar = async (ID)=>{
-        const result = await api.get(`/investimentoByID/${ID}`)
-        setInvestimento(result.data)
-        console.log(investimento)
+        const result = await api.get(`/movimentacoes/${UsuarioLogadoID}?movimentacaoId=${ID}`)
+        // setInvestimento(result.data)
+        console.log(result.data)
         setIsEditar(true)
-        openModal(true)
+        // openModal(true)
     }
 
     const remover = async (ID)=>{
