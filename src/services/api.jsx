@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'https://investimento-back-end-82tyubur0-guilhermes-projects-4b6f0e6b.vercel.app'
-
+    baseURL: 'https://high-deadpool-orange-bahrain.bohr.io/'
+    //http://localhost:3300/'
 })
 export default api;
 
