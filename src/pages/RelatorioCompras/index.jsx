@@ -73,9 +73,8 @@ export default function RelatorioCompras(){
     }
 
     const editar = async (ID)=>{
-        const result = await api.get(`/investimentoByID/${ID}`)
+        const result = await api.get(`/movimentacao/${ID}`)
         setInvestimento(result.data)
-        console.log(investimento)
         setIsEditar(true)
         openModal(true)
     }
