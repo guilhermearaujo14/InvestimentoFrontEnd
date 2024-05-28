@@ -5,7 +5,8 @@ import './style.css';
 import api from '../../../services/api';
 import Carregando from '../Carregando/Carregando';
 
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
+import FormataData from '../../../utils/FormataData';
 
 // eslint-disable-next-line react/prop-types
 function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, investimento}){
@@ -14,6 +15,7 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
     let isModalAberto = isOpen;
     let isEditar = isEdit;
     const [papel, setPapel] = useState({
+        movimentacaoId: 0,
         ticket: ticketParamter,
         quantidade: '',
         valor: '',
@@ -94,7 +96,8 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
     async function editar(){
         setIsCarregando(true)
         try {
-            const result = await api.post(`/cadastraInvestimento/${UsuarioID}`,{
+            const result = await api.put(`/AtualizaMovimentacao/${UsuarioID}`,{
+                "MOVIMENTACAO_ID": investimento.ID,
                 "PAPEL": papel.ticket,
                 "SETOR": papel.setor, 
                 "QUANTIDADE_MOVIMENTACAO":papel.quantidade, 
@@ -113,15 +116,16 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
     //Criação de um novo papel
     useEffect(()=>{
         if(isEdit && investimento){
-            const date = new Date(investimento.DATA_COMPRA)
-
+            //const date = new Date(investimento.DATA_COMPRA)
+            const data = FormataData(investimento.DATA_MOVIMENTACAO)
+            console.log(data)
             setPapel({
                 ticket: investimento.PAPEL,
                 quantidade: investimento.QUANTIDADE ,
-                valor: investimento.VALOR,
-                total: investimento.TOTAL_INVESTIDO,
+                valor: investimento.PRECO,
+                total: investimento.TOTAL,
                 setor: investimento.SETOR,
-                dataCompra: format(date, 'yyyy-MM-dd'),
+                dataCompra: data,
                 usuarioID: UsuarioID
             })
         }else{
@@ -166,7 +170,7 @@ function ModalAdicionarPapel({ isOpen, ticketParamter, fechaModal, isEdit, inves
                         </div>
                             <div className='container-input-modal'>
                                 <label htmlFor="ticket">Ticket</label>
-                                <input type='text' placeholder= 'Informe o ticket' value={papel.ticket} onChange={(e)=> setPapel({...papel, ticket: e.target.value})}/>
+                                <input type='text' placeholder= 'Informe o ticket' value={papel.ticket} onChange={(e)=> setPapel({...papel, ticket: e.target.value})}   disabled = {isEdit === true ? true : false} style={{cursor: isEdit === true ? 'not-allowed' :''}}/>
                             </div>
                             <div style={{display:'flex', flexDirection: 'row', gap:'5px'}}>
                                 <div className='container-input-modal' style={{width: '30%' }}>
