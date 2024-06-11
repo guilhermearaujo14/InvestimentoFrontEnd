@@ -39,12 +39,12 @@ try {
 
         if(result.data.isSucesso){
             console.log(result)
-            toast.success(`${result.data.message}!`)
+            toast.success(`${result.data.message}!`, {position: 'top-center'})
             sessionStorage.setItem('UsuarioID', result.data.usuario_id );
             sessionStorage.setItem('UserName', result.data.usuario);
             navigate("/home")
         }else{
-            toast.warning(`${result.data.message}!`)
+            toast.warning(`${result.data.message}!`, {position: 'top-center'})
         }
 
         
@@ -78,7 +78,7 @@ try {
                         <p><Link to={'/cadastroUsuario'}>Não tem cadastro?</Link></p>
                     </form>
                 </div>
-                <Link to={'/Proventos'}> Proventos</Link>
+                {/* <Link to={'/Proventos'}> Proventos</Link> */}
             </div>
             <Carregando isOpen={isCarregando} mensagem={''}/>
             <Proventos isOpen={false} />

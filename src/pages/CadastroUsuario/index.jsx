@@ -42,10 +42,17 @@ function CadastroUsuario(){
                 "EMAIL": usuario.email,
                 "SENHA": usuario.senha,
             })
-            console.log(response.data)
-            navigate('/')
+            if(response.data.isSucesso){
+                console.log(response.data)
+                toast.success('Cadastrado realizado com sucesso!', {position: 'top-center'})
+                navigate('/')
+            }else{
+                console.log(response.data)
+                toast.warning(response.data.message, {position: 'top-center'})
+            }
         } catch (error) {
-            console.log(error.response)
+            console.log(error.response.data.message)
+            toast.warning(error.response.data.message, {position: 'top-center'})
         }
         
     }
@@ -66,7 +73,7 @@ function CadastroUsuario(){
                     <input type="text" placeholder="Digite seu nome..." name="nome" required value={usuario.nome} onChange={(e)=> setUsuario({...usuario, nome: e.target.value})}/>
 
                     <label htmlFor="cpf">CPF*</label>
-                    <input type="text" placeholder="Digite seu CPF..."  name="cpf" required value={usuario.cpf} onChange={(e)=>setUsuario({...usuario, cpf: e.target.value})}/>
+                    <input type="text" placeholder="Digite seu CPF..."  name="cpf" required value={usuario.cpf} onChange={(e)=>setUsuario({...usuario, cpf: e.target.value})} maxLength={11}/>
 
                     <label htmlFor="dataNascimento">Data de Nascimento</label>
                     <input type="date" name="dataNascimento" value={usuario.dataNascimento} onChange={(e)=>setUsuario({...usuario, dataNascimento: e.target.value})}/>

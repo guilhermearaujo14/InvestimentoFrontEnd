@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 import Carregando from '../../components/Modal/Carregando/Carregando'; 
 import Contador from '../../components/Contador';
-
+import ChartPie from '../../components/graficos/GraficoPizzaHome';
 
 function Home(){
     const UsuarioLogado = sessionStorage.getItem('UserName');
@@ -36,12 +36,12 @@ function Home(){
                 const result = await api.get(`totalizadores/${UsuarioID}`);
                 let [data] = await result.data;
                 setDados(data)
-                console.log(dados);
             } catch (error) {
                 toast.warning(error.message, {position: 'top-center'})
             }finally{
                 setIsCarregando(false)
             }}
+            console.log(dados);
             CarregarDadosTela(UsuarioID)
     },[])
 
@@ -59,6 +59,9 @@ function Home(){
                             <Contador valor={dados.TOTAL_BDRS} titulo='BDRs' porcentagem={(dados.TOTAL_BDRS / dados.TOTAL_GERAL)*100} />
                             <Contador valor={dados.TOTAL_FI_AGRO} titulo='Fundo de investimento' porcentagem={(dados.TOTAL_FI_AGRO / dados.TOTAL_GERAL)*100} />
 
+            </div>
+            <div className="container-grafico-pizza">
+                <ChartPie dados={dados} />
             </div>
         <Carregando isOpen={isCarregando} mensagem={''} />
        </div>
