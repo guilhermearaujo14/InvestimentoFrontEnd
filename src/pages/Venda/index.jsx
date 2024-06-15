@@ -88,10 +88,13 @@ export default function Venda(){
                 "isCOMPRA": 0,
                 "isVENDA": 1
             })
-            
-            toast.success(response.data.message ,{position: 'top-center'})
-            setSearchPapel('')
-            setDados([])
+            if(response.data.isSucesso){
+                toast.success(response.data.message ,{position: 'top-center'})
+                setSearchPapel('')
+                setDados([])
+            }else{
+                toast.warning(response.data.message ,{position: 'top-center'})
+            }
         }else{
             toast.error('Ops... Não foi possível registrar a venda!',{position: 'top-center'})
         }
