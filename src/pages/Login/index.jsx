@@ -3,6 +3,8 @@ import { Link, useNavigate} from 'react-router-dom';
 import apiLogin from '../../services/api';
 import { toast } from 'react-toastify';
 
+import Button from '@mui/material/Button'
+
 import './style.css';
 import Carregando from '../../components/Modal/Carregando/Carregando';
 
@@ -73,7 +75,10 @@ try {
                         <label htmlFor="senha">Senha</label>
                         <input type="password" required placeholder='Digite sua senha... ' value={senha} onChange={(e)=> setSenha(e.target.value)}/>
                         <div className="container-btn-entrar">
-                            <button className='btn-entrar' onClick={Logar}>ENTRAR</button>
+                            {/* <button className='btn-entrar' onClick={Logar}>ENTRAR</button> */}
+                            <Button variant='contained' color='success' size='large' onClick={Logar}> 
+                                ENTRAR
+                            </Button>
                         </div>
                         <p><Link to={'/cadastroUsuario'}>Não tem cadastro?</Link></p>
                     </form>
