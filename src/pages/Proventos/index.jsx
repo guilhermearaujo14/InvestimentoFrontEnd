@@ -11,7 +11,7 @@ export default function Proventos(){
     const dadosProventos = dados;
     const [totalPeriodo, setTotalPeriodo] = useState(0)
 
-    let isCarregando = true
+    let isCarregando = false
     
 function somaTotal(){
     const totalPeriodo = dados.reduce((total, item) => total + item.VALOR,0)

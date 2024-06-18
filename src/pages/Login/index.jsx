@@ -78,7 +78,7 @@ try {
                         <p><Link to={'/cadastroUsuario'}>Não tem cadastro?</Link></p>
                     </form>
                 </div>
-                {/* <Link to={'/Proventos'}> Proventos</Link> */}
+                 <Link to={'/Proventos'}> Proventos</Link>
             </div>
             <Carregando isOpen={isCarregando} mensagem={''}/>
             <Proventos isOpen={false} />
