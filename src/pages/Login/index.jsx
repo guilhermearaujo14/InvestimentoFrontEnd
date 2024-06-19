@@ -9,6 +9,10 @@ import './style.css';
 import Carregando from '../../components/Modal/Carregando/Carregando';
 
 import Proventos from '../../components/Modal/ModalAdicionarProventos';
+import BasicTextField from '../../components/Formulario/TextField';
+
+
+
 
 function Login(){
 
@@ -70,12 +74,11 @@ try {
                 </div>
                 <div className="container-formulario">
                     <form className='formulario-login'>
-                        <label htmlFor="cpf">CPF</label>
-                        <input type="number" required placeholder='Digite seu CPF... ' value={cpf} onChange={(e)=> setCpf(e.target.value)}/>
-                        <label htmlFor="senha">Senha</label>
-                        <input type="password" required placeholder='Digite sua senha... ' value={senha} onChange={(e)=> setSenha(e.target.value)}/>
+                        <BasicTextField label={"CPF"} name={"cpf"} required={"required"} type={"number"} value={cpf} onChange={(e)=> setCpf(e.target.value)} />
+                        
+                        <BasicTextField label={"Senha"} name={"senha"} required={"required"} type={"password"} value={senha} onChange={(e)=> setSenha(e.target.value)} />
+                        
                         <div className="container-btn-entrar">
-                            {/* <button className='btn-entrar' onClick={Logar}>ENTRAR</button> */}
                             <Button variant='contained' color='success' size='large' onClick={Logar}> 
                                 ENTRAR
                             </Button>
