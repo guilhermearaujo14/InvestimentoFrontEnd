@@ -63,6 +63,15 @@
     text-align: start;
     width: 500px;
 }
+.container-proventos-table{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.container-mesRef{
+    width: 50%;
+}
 
 @media (max-width: 500px) {
     .container-cabecalho{
